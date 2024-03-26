@@ -3,6 +3,7 @@ workflows:
     name: Welcome Pokemon
     instance_type: mac_pro
     max_build_duration: 100
+
     environment:
       groups:
         - keystore_credentials
@@ -49,6 +50,8 @@ workflows:
         - echo "single line script"
         - name: Get flutter packages
           script: flutter packages pub get
+        - name: Build APK for dev flavor
+          script: flutter build appbundle --release -t lib/main_development.dart
         - name: Build APK
           script: flutter build apk --release
         - name: Build for iOS
