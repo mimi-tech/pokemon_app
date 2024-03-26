@@ -50,12 +50,18 @@ workflows:
         - echo "single line script"
         - name: Get flutter packages
           script: flutter packages pub get
-        - name: Build APK for dev flavor
-          script: flutter build appbundle --release -t lib/main_development.dart
-        - name: Build APK
-          script: flutter build apk --release
-        - name: Build for iOS
-          script: flutter build ios
+        - name: Build APK for production
+          script: flutter build apk --release --flavor production
+        - name: Build APK for staging
+          script: flutter build apk --release --flavor staging
+        - name: Build APK for development
+          script: flutter build apk --release --flavor development
+        - name: Build for iOS production
+          script: flutter build ios --flavor production
+        - name: Build for iOS staging
+          script: flutter build ios --flavor staging
+        - name: Build for iOS development
+          script: flutter build ios --flavor development
 
     artifacts:
       - build/**/outputs/apk/**/*.apk                   # relative path for a project in root directory   # relative path for a project in subfolder
