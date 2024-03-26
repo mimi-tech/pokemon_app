@@ -12,11 +12,17 @@ import 'package:flutter/widgets.dart';
 class Assets {
   Assets._();
 
+  static const String check = 'assets/check.svg';
   static const AssetGenImage logo = AssetGenImage('assets/logo.png');
   static const String logo1 = 'assets/logo1.svg';
+  static const AssetGenImage noiseBackground =
+      AssetGenImage('assets/noise_background.png');
+  static const AssetGenImage rectangle = AssetGenImage('assets/rectangle.png');
+  static const String search = 'assets/search.svg';
 
   /// List of all assets
-  static List<dynamic> get values => [logo, logo1];
+  static List<dynamic> get values =>
+      [check, logo, logo1, noiseBackground, rectangle, search];
 }
 
 class AssetGenImage {

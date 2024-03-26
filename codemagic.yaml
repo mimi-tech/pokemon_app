@@ -1,0 +1,69 @@
+workflows:
+  hello-world:
+    name: Welcome Pokemon
+    instance_type: mac_pro
+    max_build_duration: 100
+    environment:
+      groups:
+        - keystore_credentials
+        - app_store_credentials
+      vars:
+        GOOGLE_PLAY_TRACK: "beta"
+      flutter: stable
+      xcode: latest
+      cocoapods: 1.10.1
+      node: 20.12.0
+      npm: 8.0.0
+      ndk: r21d
+      java: 22.0
+      ruby: 3.3.0
+
+    cache:
+      cache_paths:
+        - $HOME/.gradle/caches
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+        - $CM_BUILD_DIR/node_modules
+    triggering:
+      events: # List the events that trigger builds
+        - push
+        - pull_request
+        - pull_request_labeled      #GitHub only
+        - tag
+      branch_patterns: # Include or exclude watched branches
+        - pattern: '*'
+          include: true
+          source: true
+        - pattern: excluded-target
+          include: false
+          source: false
+        - pattern: included-source
+          include: true
+          source: true
+      tag_patterns: # Include or exclude watched tag labels
+        - pattern: '*'
+          include: true
+      cancel_previous_builds: true  # Set to `true` to automatically cancel outdated webhook builds
+
+    scripts:
+        - echo "single line script"
+        - name: Get flutter packages
+          script: flutter packages pub get
+        - name: Build APK
+          script: flutter build apk --release
+        - name: Build for iOS
+          script: flutter build ios
+
+    artifacts:
+      - build/**/outputs/apk/**/*.apk                   # relative path for a project in root directory   # relative path for a project in subfolder
+      - build/**/outputs/**/*.aab
+      - flutter_drive.log
+
+    publishing:
+      email:
+        recipients:
+          - onuohamiriam44@gmail.com
+
+
+
+

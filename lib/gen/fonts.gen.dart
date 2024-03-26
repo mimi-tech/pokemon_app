@@ -15,4 +15,7 @@ class FontFamily {
 
   /// Font family: General Sans
   static const String generalSans = 'General Sans';
+
+  /// Font family: Sofia Sans
+  static const String sofiaSans = 'Sofia Sans';
 }

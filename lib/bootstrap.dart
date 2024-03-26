@@ -3,7 +3,15 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:phundit_app/commons/color.dart';
+import 'package:phundit_app/services/pokemon_service.dart';
+import 'package:phundit_app/theme/theme_cubit.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+
+import 'logic/pokemon_bloc.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -36,7 +44,14 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
       // We recommend adjusting this value in production.
       ..tracesSampleRate = 1.0;
     },
-    appRunner: () async => runApp(await builder()),
+    appRunner: () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      HydratedBloc.storage = await HydratedStorage.build(
+          storageDirectory: await getApplicationDocumentsDirectory(),
+      );
+      return runApp( await builder(),
+      );},
+
   );
 
 }

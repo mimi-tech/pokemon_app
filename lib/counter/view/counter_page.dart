@@ -31,10 +31,6 @@ class CounterView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          ElevatedButton(onPressed: (){
-            context.router .push(const RouteB());
-
-          }, child: const Text('Go to Counter')),
 
           FloatingActionButton(
             onPressed: () => context.read<CounterCubit>().increment(),

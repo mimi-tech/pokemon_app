@@ -3,5 +3,105 @@
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
+    },
+
+
+    "poke": "Poké",
+    "@poke": {
+        "description": "Poké"
+    },
+
+
+    "book": "book",
+    "@book": {
+        "description": "book"
+    },
+
+
+    "largestPokemon": "Largest Pokémon index with information about every Pokemon you can think of.",
+    "@largestPokemon": {
+        "description": "Largest Pokémon index with information about every Pokemon you can think of."
+    },
+
+
+    "enterPokemonName": "Enter pokemon name",
+    "@enterPokemonName": {
+        "description": "Enter pokemon name"
+    },
+
+
+    "viewAll": "View all",
+    "@viewAll": {
+        "description": "View all"
+    },
+
+    "loading": "Loading...",
+    "@loading": {
+        "description": "Loading..."
+    },
+
+    "somethingWentWrong": "Something went wrong!",
+    "@somethingWentWrong": {
+        "description": "Something went wrong!"
+    },
+
+    "about": "About",
+    "@about": {
+        "description": "About"
+    },
+
+    "stats": "Stats",
+    "@stats": {
+        "description": "Stats"
+    },
+
+    "height": "Height",
+    "@height": {
+        "description": "Height"
+    },
+
+    "weight": "Weight",
+    "@weight": {
+        "description": "Weight"
+    },
+
+    "abilities": "Abilities",
+    "@abilities": {
+        "description": "Abilities"
+    },
+
+    "attack": "Attack",
+    "@attack": {
+        "description": "Attack"
+    },
+
+    "defense": "Defense",
+    "@defense": {
+        "description": "Defense"
+    },
+
+    "specialAttack": "Special Attack",
+    "@specialAttack": {
+        "description": "Special Attack"
+    },
+
+    "specialDefence": "Special Defense",
+    "@specialDefence": {
+        "description": "Special Defense"
+    },
+
+    "speed": "Speed",
+    "@speed": {
+        "description": "Speed"
+    },
+
+    "similar": "Similar",
+    "@similar": {
+        "description": "Similar"
+    },
+
+    "chooseTheme": "Choose Theme",
+    "@chooseTheme": {
+        "description": "Choose Theme"
     }
 }
