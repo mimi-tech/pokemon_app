@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/color_picker.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/theme_dialog.dart';
 import 'package:phundit_app/gen/assets.gen.dart';
 import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/presentation/viewAll/widgets/color_picker.dart';
-import 'package:phundit_app/presentation/viewAll/widgets/theme_dialog.dart';
 class ViewAllAppbar extends StatelessWidget implements PreferredSizeWidget{
   const ViewAllAppbar({super.key});
 

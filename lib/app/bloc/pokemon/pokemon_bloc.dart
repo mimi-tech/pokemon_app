@@ -2,8 +2,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:phundit_app/logic/pokemon_event.dart';
-import 'package:phundit_app/logic/pokemon_state.dart';
+import 'package:phundit_app/app/bloc/pokemon/pokemon_event.dart';
+import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
+
 import 'package:phundit_app/model/pokemonnModel/pokemonModel.dart';
 import 'package:phundit_app/services/feedback.dart';
 import 'package:phundit_app/services/pokemon_service.dart';

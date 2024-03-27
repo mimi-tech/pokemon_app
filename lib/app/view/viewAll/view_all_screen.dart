@@ -7,18 +7,20 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:number_paginator/number_paginator.dart';
+import 'package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart';
+import 'package:phundit_app/app/bloc/Logic/pokemon_details_event.dart';
+import 'package:phundit_app/app/bloc/Logic/pokemon_details_state.dart';
+import 'package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart';
+import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
 import 'package:phundit_app/app/view/viewAll/sideModel/side_model.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/appbar.dart';
 import 'package:phundit_app/app/view/viewAll/widgets/nestedCards.dart';
 import 'package:phundit_app/commons/color.dart';
 import 'package:phundit_app/commons/dimes.dart';
 import 'package:phundit_app/gen/assets.gen.dart';
-import 'package:phundit_app/logic/pokemon_bloc.dart';
-import 'package:phundit_app/logic/pokemon_state.dart';
+
 import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_bloc.dart';
-import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_event.dart';
-import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_state.dart';
-import 'package:phundit_app/presentation/viewAll/widgets/appbar.dart';
+
 
 
 @RoutePage()

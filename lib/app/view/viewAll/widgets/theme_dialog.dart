@@ -2,9 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/color_picker.dart';
 import 'package:phundit_app/commons/color.dart';
 import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/presentation/viewAll/widgets/color_picker.dart';
 import 'package:phundit_app/theme/theme_cubit.dart';
 
 Color selectedColor = kPinkColor;

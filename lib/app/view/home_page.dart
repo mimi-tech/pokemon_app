@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart';
+import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
 import 'package:phundit_app/commons/color.dart';
 import 'package:phundit_app/commons/dimes.dart';
 import 'package:phundit_app/gen/assets.gen.dart';
-import 'package:phundit_app/logic/pokemon_bloc.dart';
-import 'package:phundit_app/logic/pokemon_state.dart';
 import 'package:phundit_app/l10n/l10n.dart';
 import 'package:phundit_app/routes/app_router.gr.dart';
 

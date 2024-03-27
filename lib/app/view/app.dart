@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart';
+import 'package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart';
+import 'package:phundit_app/app/bloc/pokemon/pokemon_event.dart';
 import 'package:phundit_app/commons/color.dart';
 import 'package:phundit_app/counter/counter.dart';
 import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/logic/pokemon_bloc.dart';
-import 'package:phundit_app/logic/pokemon_event.dart';
-import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_bloc.dart';
 import 'package:phundit_app/routes/app_router.dart';
 import 'package:phundit_app/services/pokemon_service.dart';
 import 'package:phundit_app/theme/light_theme.dart';

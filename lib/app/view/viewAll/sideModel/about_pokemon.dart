@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/enum.dart';
 import 'package:phundit_app/commons/color.dart';
 import 'package:phundit_app/commons/dimes.dart';
-import 'package:phundit_app/presentation/viewAll/widgets/enum.dart';
 import 'package:phundit_app/l10n/l10n.dart';
 class PokemonAbout extends StatelessWidget {
   const PokemonAbout({super.key});

@@ -6,16 +6,16 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
+import 'package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart';
+import 'package:phundit_app/app/view/viewAll/sideModel/about_pokemon.dart';
 import 'package:phundit_app/app/view/viewAll/sideModel/similar_pokemon.dart';
+import 'package:phundit_app/app/view/viewAll/sideModel/stats_pokemon.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/enum.dart';
 import 'package:phundit_app/app/view/viewAll/widgets/nestedCards.dart';
 import 'package:phundit_app/commons/color.dart';
 import 'package:phundit_app/commons/dimes.dart';
-import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_bloc.dart';
-import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_state.dart';
-import 'package:phundit_app/presentation/viewAll/widgets/enum.dart';
 import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/presentation/viewAll/sideModel/about_pokemon.dart';
-import 'package:phundit_app/presentation/viewAll/sideModel/stats_pokemon.dart';
+
 class SideModel extends StatefulWidget {
   const SideModel({super.key});
 

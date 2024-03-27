@@ -11,7 +11,6 @@ import 'package:phundit_app/services/pokemon_service.dart';
 import 'package:phundit_app/theme/theme_cubit.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-import 'logic/pokemon_bloc.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();

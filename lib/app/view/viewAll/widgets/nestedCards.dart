@@ -6,13 +6,14 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
+import 'package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart';
+import 'package:phundit_app/app/bloc/Logic/pokemon_details_event.dart';
+import 'package:phundit_app/app/bloc/Logic/pokemon_details_state.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/enum.dart';
 import 'package:phundit_app/commons/color.dart';
 import 'package:phundit_app/gen/assets.gen.dart';
 import 'package:phundit_app/model/pokemon/pokemon.dart';
-import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_bloc.dart';
-import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_event.dart';
-import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_state.dart';
-import 'package:phundit_app/presentation/viewAll/widgets/enum.dart';
+
 class NestedCard extends StatelessWidget {
   final Pokemon pokemonData;
   final List<Pokemon> fetchedPokemon;
