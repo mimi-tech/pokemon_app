@@ -12,7 +12,6 @@ import 'package:flutter/widgets.dart';
 class Assets {
   Assets._();
 
-  static const String check = 'assets/check.svg';
   static const AssetGenImage logo = AssetGenImage('assets/logo.png');
   static const String logo1 = 'assets/logo1.svg';
   static const AssetGenImage noiseBackground =
@@ -22,7 +21,7 @@ class Assets {
 
   /// List of all assets
   static List<dynamic> get values =>
-      [check, logo, logo1, noiseBackground, rectangle, search];
+      [logo, logo1, noiseBackground, rectangle, search];
 }
 
 class AssetGenImage {

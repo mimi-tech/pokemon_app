@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/nestedCards.dart';
 import 'package:phundit_app/commons/color.dart';
 import 'package:phundit_app/commons/dimes.dart';
 import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_bloc.dart';
 import 'package:phundit_app/presentation/viewAll/Logic/pokemon_details_state.dart';
 import 'package:phundit_app/presentation/viewAll/widgets/enum.dart';
 import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/presentation/viewAll/widgets/nestedCards.dart';
 
-import '../Logic/pokemon_details_event.dart';
+import '../../../../presentation/viewAll/Logic/pokemon_details_event.dart';
+
 class PokemonSimilar extends StatelessWidget {
   const PokemonSimilar({super.key});
 

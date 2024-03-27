@@ -1,5 +1,5 @@
 workflows:
-  build:  # Replace with a more descriptive name if needed
+  build:
     name: Flutter Build and Analyze (with Flavors)
 
     environment:
@@ -42,11 +42,12 @@ workflows:
 
       # Build scripts for each flavor (modify main Dart file paths as needed)
       - name: Build APK for development flavor
-        script: flutter build apk --split-per-abi --flavor development  -t lib/main_development.dart
+        script: flutter build apk --debug  --split-per-abi --no-tree-shake-icons --flavor development  -t lib/main_development.dart
       - name: Build APK for staging flavor
-        script: flutter build apk --split-per-abi --flavor staging  -t lib/main_development.dart
+        script: flutter build apk --debug  --split-per-abi --no-tree-shake-icons --flavor stage  -t lib/main_stage.dart
       - name: Build APK for production flavor
-        script: flutter build apk --split-per-abi --flavor production  -t lib/main_development.dart
+        script: flutter build apk --debug  --split-per-abi --no-tree-shake-icons --flavor production  -t lib/main_production.dart
+
 
       - name: Build app bundle for release (all flavors)
         script: |  # Multi-line script for app bundle (modify main Dart file paths as needed)
