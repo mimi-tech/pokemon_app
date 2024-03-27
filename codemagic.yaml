@@ -1,78 +1,68 @@
 workflows:
-  hello-world:
-    name: Welcome Pokemon
-    instance_type: mac_pro
-    max_build_duration: 100
+  build:  # Replace with a more descriptive name if needed
+    name: Flutter Build and Analyze (with Flavors)
 
     environment:
-      groups:
-        - keystore_credentials
-        - app_store_credentials
+      # Define any environment variables needed by your app or build process
       vars:
-        GOOGLE_PLAY_TRACK: "beta"
+        FLUTTER_ANALYZER_ADDITIONAL_OPTIONS: '--fatal-warnings'  # Adjust if needed for very_good_analysis
+
+      # Specify Flutter, Xcode, and other tools versions
       flutter: stable
       xcode: latest
-      cocoapods: 1.10.1
-      node: 20.12.0
-      npm: 8.0.0
-      ndk: r21d
-      java: 22.0
-      ruby: 3.3.0
+      # Add other tools and their versions as needed (e.g., cocoapods, node, npm)
 
     cache:
       cache_paths:
-        - $HOME/.gradle/caches
-        - $FLUTTER_ROOT/.pub-cache
-        - $HOME/Library/Caches/CocoaPods
+        - $HOME/.gradle/caches  # Gradle cache
+        - $FLUTTER_ROOT/.pub-cache  # Flutter package cache
+        - $HOME/Library/Caches/CocoaPods  # Optional: Remove if causing issues
         - $CM_BUILD_DIR/node_modules
+
     triggering:
-      events: # List the events that trigger builds
+      events:
         - push
         - pull_request
-        - pull_request_labeled      #GitHub only
+        - pull_request_labeled  # GitHub only
         - tag
-      branch_patterns: # Include or exclude watched branches
+      branch_patterns:
         - pattern: '*'
           include: true
           source: true
-        - pattern: excluded-target
-          include: false
-          source: false
-        - pattern: included-source
-          include: true
-          source: true
-      tag_patterns: # Include or exclude watched tag labels
+      tag_patterns:
         - pattern: '*'
           include: true
-      cancel_previous_builds: true  # Set to `true` to automatically cancel outdated webhook builds
+      cancel_previous_builds: true  # Cancel outdated builds
 
     scripts:
-        - echo "single line script"
-        - name: Get flutter packages
-          script: flutter packages pub get
-        - name: Build APK for production
-          script: flutter build apk --release --flavor production
-        - name: Build APK for staging
-          script: flutter build apk --release --flavor staging
-        - name: Build APK for development
-          script: flutter build apk --release --flavor development
-        - name: Build for iOS production
-          script: flutter build ios --flavor production
-        - name: Build for iOS staging
-          script: flutter build ios --flavor staging
-        - name: Build for iOS development
-          script: flutter build ios --flavor development
+      - name: Analyze Flutter code
+        script: flutter analyze
+      - name: Get Flutter packages
+        script: flutter packages pub get
+
+      # Build scripts for each flavor (modify main Dart file paths as needed)
+      - name: Build APK for development flavor
+        script: flutter build apk --split-per-abi --flavor development  -t lib/main_development.dart
+      - name: Build APK for staging flavor
+        script: flutter build apk --split-per-abi --flavor staging  -t lib/main_development.dart
+      - name: Build APK for production flavor
+        script: flutter build apk --split-per-abi --flavor production  -t lib/main_development.dart
+
+      - name: Build app bundle for release (all flavors)
+        script: |  # Multi-line script for app bundle (modify main Dart file paths as needed)
+          flutter build appbundle --release -t lib/main_development.dart
+          flutter build appbundle --release -t lib/main_staging.dart
+          flutter build appbundle --release -t lib/main_production.dart
+      - name: Build for iOS
+        script: flutter build ios
 
     artifacts:
-      - build/**/outputs/apk/**/*.apk                   # relative path for a project in root directory   # relative path for a project in subfolder
+      # Include artifacts for each flavor and app bundle
+      - build/**/outputs/apk/development/**/*.apk
+      - build/**/outputs/apk/staging/**/*.apk
+      - build/**/outputs/apk/production/**/*.apk
       - build/**/outputs/**/*.aab
-      - flutter_drive.log
+      - flutter_drive.log  # Optional, remove if not needed
 
     publishing:
-      email:
-        recipients:
-          - onuohamiriam44@gmail.com
-
-
-
-
+    # Define any post-build publishing actions (e.g., email notifications)
