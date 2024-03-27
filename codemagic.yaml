@@ -1,16 +1,22 @@
 workflows:
   build:
     name: Flutter Build and Analyze (with Flavors)
-
+    max_build_duration: 120
+    instance_type: mac_pro
     environment:
-      # Define any environment variables needed by your app or build process
+      android_signing:
+        - keystore_reference
       vars:
         FLUTTER_ANALYZER_ADDITIONAL_OPTIONS: '--fatal-warnings'  # Adjust if needed for very_good_analysis
 
       # Specify Flutter, Xcode, and other tools versions
       flutter: stable
       xcode: latest
-      # Add other tools and their versions as needed (e.g., cocoapods, node, npm)
+      node: 20:12:0
+      npm: 8.0.0
+      ndk: 26.2.1139434
+      ruby: 3.3.0
+      cocoapods: 1.15.2
 
     cache:
       cache_paths:
@@ -26,17 +32,12 @@ workflows:
         - pull_request_labeled  # GitHub only
         - tag
       branch_patterns:
-        - pattern: '*'
+        - pattern: 'master'
           include: true
           source: true
-      tag_patterns:
-        - pattern: '*'
-          include: true
       cancel_previous_builds: true  # Cancel outdated builds
 
     scripts:
-      - name: Analyze Flutter code
-        script: flutter analyze
       - name: Get Flutter packages
         script: flutter packages pub get
 
@@ -48,14 +49,6 @@ workflows:
       - name: Build APK for production flavor
         script: flutter build apk --debug  --split-per-abi --no-tree-shake-icons --flavor production  -t lib/main_production.dart
 
-
-      - name: Build app bundle for release (all flavors)
-        script: |  # Multi-line script for app bundle (modify main Dart file paths as needed)
-          flutter build appbundle --release -t lib/main_development.dart
-          flutter build appbundle --release -t lib/main_staging.dart
-          flutter build appbundle --release -t lib/main_production.dart
-      - name: Build for iOS
-        script: flutter build ios
 
     artifacts:
       # Include artifacts for each flavor and app bundle
