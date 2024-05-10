@@ -11,7 +11,7 @@ import 'package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart';
 import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
 import 'package:phundit_app/app/view/viewAll/sideModel/side_model.dart';
 import 'package:phundit_app/app/view/viewAll/widgets/view_all_appbar.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/nestedCards.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/nested_cards.dart';
 import 'package:phundit_app/commons/app_colors.dart';
 import 'package:phundit_app/commons/app_dimes.dart';
 import 'package:phundit_app/commons/app_strings.dart';

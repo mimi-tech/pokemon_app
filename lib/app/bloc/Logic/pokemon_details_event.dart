@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:phundit_app/model/pokemon/pokemon.dart';
-import 'package:phundit_app/model/pokemonnModel/pokemonModel.dart';
+import 'package:phundit_app/model/pokemonnModel/pokemon_model.dart';
 
 abstract class PokemonDetailsEvent extends Equatable {
   const PokemonDetailsEvent();

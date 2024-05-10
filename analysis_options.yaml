@@ -128,7 +128,9 @@ dart_code_metrics:
           - contains
     - prefer-immediate-return
     - binary-expression-operand-order
-    - avoid-similar-names
+    - avoid-similar-names:
+        show-similarity: true
+        similarity-threshold: 0.9
     - list-all-equatable-fields
     - prefer-conditional-expressions:
         ignore-nested: true

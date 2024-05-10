@@ -70,7 +70,7 @@ class NestedCards extends StatelessWidget {
                               Scaffold.of(context).openDrawer();
                             },
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
+                              backgroundColor: MaterialStateProperty.all(
                                 Theme.of(context).primaryColor,
                               ),
                               padding:

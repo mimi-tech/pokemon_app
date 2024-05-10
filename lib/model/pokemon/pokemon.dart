@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -122,4 +124,3 @@ class Types with _$Types {
 
   factory Types.fromJson(Map<String, dynamic> json) => _$TypesFromJson(json);
 }
-

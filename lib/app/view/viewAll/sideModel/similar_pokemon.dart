@@ -6,7 +6,7 @@ import 'package:phundit_app/app/bloc/Logic/pokemon_details_event.dart';
 import 'package:phundit_app/app/bloc/Logic/pokemon_details_state.dart';
 import 'package:phundit_app/app/view/viewAll/sideModel/pokemon_details.dart';
 
-import 'package:phundit_app/app/view/viewAll/widgets/nestedCards.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/nested_cards.dart';
 import 'package:phundit_app/commons/app_colors.dart';
 import 'package:phundit_app/commons/app_dimes.dart';
 import 'package:phundit_app/l10n/l10n.dart';

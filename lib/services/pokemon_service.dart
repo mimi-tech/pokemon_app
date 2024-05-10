@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:phundit_app/commons/app_dimes.dart';
 import 'package:phundit_app/commons/app_strings.dart';
 import 'package:phundit_app/model/pokemon/pokemon.dart';
-import 'package:phundit_app/model/pokemonnModel/pokemonModel.dart';
+import 'package:phundit_app/model/pokemonnModel/pokemon_model.dart';
 import 'package:phundit_app/services/feedback.dart';
 
 abstract class PokemonService {

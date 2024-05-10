@@ -1,7 +1,7 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:phundit_app/app/bloc/pokemon/pokemon_event.dart';
 import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
-import 'package:phundit_app/model/pokemonnModel/pokemonModel.dart';
+import 'package:phundit_app/model/pokemonnModel/pokemon_model.dart';
 import 'package:phundit_app/services/pokemon_service.dart';
 
 class PokemonBloc extends HydratedBloc<PokemonEvent, PokemonState> {
