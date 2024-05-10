@@ -1,4 +1,166 @@
-include: package:very_good_analysis/analysis_options.5.1.0.yaml
+#include: package:very_good_analysis/analysis_options.5.1.0.yaml
+include: package:flutter_lints/flutter.yaml
+
 linter:
   rules:
-    public_member_api_docs: false
+    # Enable some DCM rules
+dart_code_metrics:  
+  rules:
+    - avoid-non-null-assertion
+    - no-magic-number
+    - arguments-ordering:
+        last:
+          - child
+          - children
+    - format-comment
+    - prefer-static-class:
+        ignore-annotations:
+          - allowedAnnotation
+        ignore-private: true
+        ignore-names:
+          - (.*)Provider
+          - use(.*)
+    - prefer-moving-to-variable:
+        allowed-duplicated-chains: 20
+    - member-ordering:
+        ignore-mixins: false
+        ignore-extensions: false
+        ignore-extension-types: false
+        ignore-enums: false 
+        order:
+          - public-fields
+          - private-fields
+          - constructors
+          - close-method
+          - dispose-method
+        widgets-order:
+          - constructor
+          - init-state-method
+          - did-change-dependencies-method
+          - did-update-widget-method
+          - dispose-method 
+          - build-method
+    - no-magic-string:
+        ignored-invocations:
+          - print
+          - debugPrint
+          - log
+          - AssetImage
+    - newline-before-return  
+    - avoid-explicit-type-declaration 
+    - prefer-match-file-name 
+    - prefer-dedicated-media-query-methods
+    - avoid-shadowing:
+        ignore-static: true
+        ignore-fields: true
+        ignore-parameters: true
+        ignored-names:
+          - context
+    - avoid-nullable-tostring
+    - avoid-unsafe-collection-methods
+    - no-equal-arguments:
+        ignored-parameters:
+          - height
+          - width
+          - horizontal
+          - vertical
+          - borderRadius
+          - left
+          - top
+          - right
+          - bottom
+          - width
+          - height
+          - radius
+    - parameters-ordering   
+    - avoid-dynamic
+    - prefer-correct-identifier-length:
+        max-identifier-length: 50
+        min-identifier-length: 1
+    - prefer-prefixed-global-constants
+    - prefer-declaring-const-constructor
+    - prefer-extracting-callbacks:
+        ignored-named-arguments:
+          - onPressed
+        allowed-line-count: 100
+    - prefer-const-border-radius
+    - prefer-addition-subtraction-assignments
+    - avoid-non-ascii-symbols:
+        ignored-invocations:
+          - print
+          - debugPrint
+          - switch
+          - EnumsHolder
+    - avoid-stateless-widget-initialized-fields
+    - avoid-async-call-in-sync-function
+    - prefer-widget-private-members
+    - avoid-ignoring-return-values
+    - avoid-inferrable-type-arguments
+    - avoid-redundant-else
+    - prefer-type-over-var
+    - prefer-single-widget-per-file
+    - prefer-correct-error-name:
+        allowed-names:
+          - err
+    - avoid-wrapping-in-padding
+    - prefer-text-rich
+    - prefer-number-format
+    - avoid-duplicate-collection-elements
+    - avoid-read-inside-build
+    - avoid-single-child-column-or-row
+    - newline-before-case
+    - prefer-overriding-parent-equality
+    - prefer-action-button-tooltip
+    - prefer-define-hero-tag
+    - avoid-shrink-wrap-in-lists
+    - avoid-nested-conditional-expressions:
+        acceptable-level: 2
+    - prefer-commenting-analyzer-ignores
+    - avoid-redundant-async
+    - avoid-passing-async-when-sync-expected
+    - no-equal-switch-case
+    - prefer-correct-json-casts
+    - prefer-returning-conditional-expressions
+    - prefer-unwrapping-future-or
+    - avoid-collection-mutating-methods:
+        ignore-local: true
+        additional-methods:
+          - contains
+    - prefer-immediate-return
+    - binary-expression-operand-order
+    - avoid-similar-names
+    - list-all-equatable-fields
+    - prefer-conditional-expressions:
+        ignore-nested: true
+    - avoid-returning-void
+    - avoid-passing-default-values
+    - prefer-typedefs-for-callbacks:
+        ignore-fields: false
+        ignore-parameters: false
+        ignore-type-arguments: false
+        ignore-return-types: false
+    - avoid-unnecessary-futures
+    - avoid-long-functions:
+          max-length: 1000
+          ignored-names:
+            - some
+            - name
+    - prefer-trailing-comma:
+        break-on: 2
+
+    
+      
+
+      
+
+      
+    
+
+
+
+
+
+
+
+
+

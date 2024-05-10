@@ -1,57 +1,30 @@
 import 'package:equatable/equatable.dart';
 import 'package:phundit_app/model/pokemonnModel/pokemonModel.dart';
 
-abstract class DataState extends Equatable {
-  const DataState();
-
+abstract class PokemonState extends Equatable {
   @override
   List<Object?> get props => [];
+  const PokemonState();
 }
 
-class DataInitial extends DataState {}
+class DataInitial extends PokemonState {}
 
-class DataLoading extends DataState {}
+class DataLoading extends PokemonState {}
 
-class DataSuccess extends DataState {
-
-  const DataSuccess(this.data);
+class DataSuccess extends PokemonState {
   final List<PokemonModel> data;
 
   @override
   List<Object?> get props => [data];
+  const DataSuccess(this.data);
 }
 
-class DataError extends DataState {
-
-  const DataError(this.error);
-  final dynamic error;
+class DataError extends PokemonState {
+  final String error;
 
   @override
   List<Object?> get props => [error];
+  const DataError(this.error);
 }
 
 
-
-class WeatherState extends Equatable {
-
-  final PokemonModel? pokemonModel;
-
-  const WeatherState({
-
-    required this.pokemonModel,
-  });
-
-  WeatherState copyWith({
-
-    PokemonModel? pokemonModel,
-  }) =>
-      WeatherState(
-
-        pokemonModel: pokemonModel ?? this.pokemonModel,
-      );
-
-  @override
-  List<Object?> get props => [pokemonModel];
-
-// ...
-}

@@ -1,49 +1,55 @@
 import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:phundit_app/model/pokemon/pokemon.dart';
 import 'package:phundit_app/model/pokemonnModel/pokemonModel.dart';
 
-
-abstract class PokemonEvent extends Equatable {
-  const PokemonEvent();
+abstract class PokemonDetailsEvent extends Equatable {
+  const PokemonDetailsEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class FetchPokemon extends PokemonEvent {
-
-  const FetchPokemon( this.start, this.end, this.pokemonData);
-  final int start;
+class FetchPokemon extends PokemonDetailsEvent {
+  const FetchPokemon(
+    this.end,
+    this.pokemonData,
+    this.start,
+  );
   final int end;
   final List<PokemonModel> pokemonData;
+  final int start;
 
   @override
-  List<Object> get props => [start, end,pokemonData];
+  List<Object> get props => [
+        end,
+        pokemonData,
+        start,
+      ];
 }
 
-
-class ItemSelected extends PokemonEvent {
+class ItemSelected extends PokemonDetailsEvent {
   final Pokemon selectedPokemon;
-  final List <Pokemon> fetchedPokemon;
+  final List<Pokemon> fetchedPokemon;
 
   const ItemSelected(
-      this.selectedPokemon,
-      this.fetchedPokemon);
+    this.fetchedPokemon,
+    this.selectedPokemon,
+  );
 
   @override
-  List<Object> get props => [selectedPokemon,fetchedPokemon];
+  List<Object> get props => [
+        selectedPokemon,
+        fetchedPokemon,
+      ];
 }
 
-class OpenDrawer extends PokemonEvent {
+class OpenDrawer extends PokemonDetailsEvent {
   const OpenDrawer();
 
   @override
   List<Object> get props => [];
 }
 
-
-// similar events.dart
 abstract class PokemonListEvent extends Equatable {
   const PokemonListEvent();
 
@@ -54,14 +60,18 @@ abstract class PokemonListEvent extends Equatable {
 class UpdateTypes extends PokemonListEvent {
   final List<Types> types;
   final List<Pokemon> pokemonList;
-  const UpdateTypes(this.types, this.pokemonList);
+  const UpdateTypes(
+    this.pokemonList,
+    this.types,
+  );
 
   @override
-  List<Object> get props => [types];
+  List<Object> get props => [
+        types,
+        pokemonList,
+      ];
 }
 
-
-// events for hovering over card
 abstract class CardEvent extends Equatable {
   const CardEvent();
 

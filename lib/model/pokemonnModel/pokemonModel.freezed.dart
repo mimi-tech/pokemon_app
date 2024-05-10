@@ -20,8 +20,8 @@ PokemonModel _$PokemonModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PokemonModel {
-  dynamic get name => throw _privateConstructorUsedError;
-  dynamic get url => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $PokemonModelCopyWith<$Res> {
           PokemonModel value, $Res Function(PokemonModel) then) =
       _$PokemonModelCopyWithImpl<$Res, PokemonModel>;
   @useResult
-  $Res call({dynamic name, dynamic url});
+  $Res call({String? name, String? url});
 }
 
 /// @nodoc
@@ -58,11 +58,11 @@ class _$PokemonModelCopyWithImpl<$Res, $Val extends PokemonModel>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$PokemonModelImplCopyWith<$Res>
       __$$PokemonModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({dynamic name, dynamic url});
+  $Res call({String? name, String? url});
 }
 
 /// @nodoc
@@ -96,11 +96,11 @@ class __$$PokemonModelImplCopyWithImpl<$Res>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
     ));
   }
 }
@@ -114,9 +114,9 @@ class _$PokemonModelImpl extends _PokemonModel with DiagnosticableTreeMixin {
       _$$PokemonModelImplFromJson(json);
 
   @override
-  final dynamic name;
+  final String? name;
   @override
-  final dynamic url;
+  final String? url;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -137,16 +137,13 @@ class _$PokemonModelImpl extends _PokemonModel with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PokemonModelImpl &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.url, url));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.url, url) || other.url == url));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(url));
+  int get hashCode => Object.hash(runtimeType, name, url);
 
   @JsonKey(ignore: true)
   @override
@@ -163,7 +160,7 @@ class _$PokemonModelImpl extends _PokemonModel with DiagnosticableTreeMixin {
 }
 
 abstract class _PokemonModel extends PokemonModel {
-  factory _PokemonModel({final dynamic name, final dynamic url}) =
+  factory _PokemonModel({final String? name, final String? url}) =
       _$PokemonModelImpl;
   _PokemonModel._() : super._();
 
@@ -171,9 +168,9 @@ abstract class _PokemonModel extends PokemonModel {
       _$PokemonModelImpl.fromJson;
 
   @override
-  dynamic get name;
+  String? get name;
   @override
-  dynamic get url;
+  String? get url;
   @override
   @JsonKey(ignore: true)
   _$$PokemonModelImplCopyWith<_$PokemonModelImpl> get copyWith =>

@@ -1,38 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:phundit_app/commons/color.dart';
+import 'package:phundit_app/commons/app_colors.dart';
+import 'package:phundit_app/commons/app_dimes.dart';
+
 class ColorPicker extends StatelessWidget {
   const ColorPicker({
+    this.borderColor,
+    this.color,
+    required this.containerSize,
+    super.key,
     required this.onPressed,
-    super.key, this.color,
-    this.borderColor, required this.containerSize,
     required this.secondContainerSize,
   });
+
   final VoidCallback onPressed;
-final Color? color;
-final Color? borderColor;
-final int containerSize;
-final int secondContainerSize;
+  final Color? borderColor;
+  final int containerSize;
+  final Color? color;
+  final int secondContainerSize;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: containerSize.toDouble(),
-        width: containerSize.toDouble(),
         decoration: BoxDecoration(
-          border: Border.all(color: borderColor??kDarkGrayColor,width: 0.93),
+          color: Colors.transparent,
+          border: Border.all(
+            color: borderColor ?? AppColors.kDarkGrayColor,
+            width: AppDimes().size093,
+          ),
           shape: BoxShape.circle,
-            color: Colors.transparent
         ),
+        width: containerSize.toDouble(),
+        height: containerSize.toDouble(),
         child: Center(
           child: Container(
-            height: secondContainerSize.toDouble(),
-            width: secondContainerSize.toDouble(),
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: color
+              color: color,
+              shape: BoxShape.circle,
             ),
-          )
+            width: secondContainerSize.toDouble(),
+            height: secondContainerSize.toDouble(),
+          ),
         ),
       ),
     );

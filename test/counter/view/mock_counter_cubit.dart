@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:phundit_app/counter/counter.dart';
+import 'package:phundit_app/counter/view/counter_view.dart';
 
 import '../../helpers/helpers.dart';
 

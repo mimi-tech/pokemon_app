@@ -5,7 +5,6 @@ abstract class ThemeState {}
 class InitialThemeState extends ThemeState {}
 
 class CurrentThemeState extends ThemeState {
-
-  CurrentThemeState(this.primaryColor);
   final Color primaryColor;
+  CurrentThemeState(this.primaryColor);
 }

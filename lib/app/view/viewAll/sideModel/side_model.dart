@@ -1,20 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hive/hive.dart';
 import 'package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart';
 import 'package:phundit_app/app/view/viewAll/sideModel/about_pokemon.dart';
 import 'package:phundit_app/app/view/viewAll/sideModel/similar_pokemon.dart';
 import 'package:phundit_app/app/view/viewAll/sideModel/stats_pokemon.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/enum.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/nestedCards.dart';
-import 'package:phundit_app/commons/color.dart';
-import 'package:phundit_app/commons/dimes.dart';
+import 'package:phundit_app/app/view/viewAll/widgets/enums_holder.dart';
+import 'package:phundit_app/commons/app_colors.dart';
+import 'package:phundit_app/commons/app_dimes.dart';
 import 'package:phundit_app/l10n/l10n.dart';
+
+import '../widgets/pokemon_type_widget.dart';
 
 class SideModel extends StatefulWidget {
   const SideModel({super.key});
@@ -24,204 +20,221 @@ class SideModel extends StatefulWidget {
 }
 
 class _SideModelState extends State<SideModel> {
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     final l10n = context.l10n;
+    List<String> selector = [
+      l10n.about,
+      l10n.stats,
+      l10n.similar,
+    ];
+    final selectedPokemon = EnumsHolder.selectedPokemon;
+    final fetchedPokemon = EnumsHolder.fetchedPokemon;
+    int selectorLength = selector.length;
 
-    List<String>  selector = [l10n.about, l10n.stats,l10n.similar];
-    return  Drawer(
-     // backgroundColor: kWhiteColor,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-                children: [
-                  Stack(
+    return Drawer(
+      width: MediaQuery.sizeOf(context).width,
+      child: Column(children: [
+        Stack(
+          children: [
+            FutureBuilder<List<Color>>(
+              future: const DominantColor().getDominantColorFromSvg(
+                selectedPokemon.sprites?.other?.dream_world?.front_default ??
+                    '',
+              ),
+              builder: (
+                context,
+                snapshot,
+              ) {
+                if (snapshot.hasData) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(AppDimes().size24),
+                        bottomRight: Radius.circular(AppDimes().size25),
+                      ),
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: snapshot.data ?? [],
+                      ),
+                    ),
+                    width: MediaQuery.sizeOf(context).width,
+                    height:
+                        MediaQuery.sizeOf(context).height * AppDimes().size03,
+                  );
+                } else if (snapshot.hasError) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(AppDimes().size24),
+                        bottomRight: Radius.circular(AppDimes().size25),
+                      ),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          AppColors.kGradientColor1,
+                          AppColors.kGradientColor2,
+                        ],
+                      ),
+                    ),
+                    width: MediaQuery.sizeOf(context).width,
+                    height:
+                        MediaQuery.sizeOf(context).height * AppDimes().size03,
+                  );
+                }
 
-                    children: [
-
-                    FutureBuilder<List<Color>>(
-                        future: getDominantColorFromSvg( selectedPokemon!.sprites!.other!
-                        .dream_world!.front_default.toString()),
-                         builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-
-                      return Container(
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        width: MediaQuery.of(context).size.width,
-                        decoration:  BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(24),
-                            bottomRight: Radius.circular(24),
-                          ),
-
-                          gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: snapshot.data!,
-                          ),
-                        ),
-                      );
-                        } else if (snapshot.hasError) {
-
-                          return Container(
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            width: MediaQuery.of(context).size.width,
-                            decoration:   const BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(24),
-                                bottomRight: Radius.circular(24),
-                              ),
-
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Color(0xFF7FCAD1), Color(0xFF3DA0A9)],
-                              ),
-                            ),
-                          );;
-                        }
-                        return  Center(
-                          child: SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.3,
-                              width: MediaQuery.of(context).size.width,
-                              child:  Center(child: CircularProgressIndicator(
-                                color: Theme.of(context).primaryColor,))),
-                        );
+                return Center(
+                  child: SizedBox(
+                    width: MediaQuery.sizeOf(context).width,
+                    height:
+                        MediaQuery.sizeOf(context).height * AppDimes().size03,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ),
+                );
               },
             ),
-
-
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
-                        child: Container(
-                          //padding: EdgeInsets.symmetric(horizontal: 20),
-                          decoration: BoxDecoration(
-                              color: kWhiteColor,
-                              borderRadius: BorderRadius.circular(5.0)
-                          ),
-                          child: IconButton(onPressed: (){
-                            Navigator.pop(context);},
-                            icon: const Icon(Icons.arrow_back),),
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.kWhiteColor,
+                borderRadius: BorderRadius.circular(AppDimes().size5),
+              ),
+              margin: EdgeInsets.symmetric(
+                vertical: AppDimes().size50,
+                horizontal: AppDimes().size20,
+              ),
+              child: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.arrow_back),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              top: AppDimes().size50,
+              right: 0,
+              child: SvgPicture.network(
+                selectedPokemon.sprites?.other?.dream_world?.front_default ??
+                    '',
+                width: AppDimes().size254,
+                height: AppDimes().size200,
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: ListView(
+            children: [
+              Column(
+                children: [
+                  SizedBox(height: AppDimes().size10),
+                  AutoSizeText(
+                    selectedPokemon.name ?? "",
+                    style: theme.displayLarge,
+                  ),
+                  SizedBox(height: AppDimes().size10),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: AppDimes().size15,
+                    children: [
+                      for (int i = 0;
+                          i < (selectedPokemon.types?.length ?? 0);
+                          i += 1)
+                        PokemonTypeWidget(
+                          title: selectedPokemon.types
+                                  ?.elementAtOrNull(i)
+                                  ?.type
+                                  ?.name ??
+                              "",
                         ),
-                      ),
-
-
-
-
-                      Positioned(
-                        top: 50,
-                        left: 0,
-                        right: 0,
-
-                        child: SvgPicture.network(
-                          selectedPokemon!.sprites != null &&
-                              selectedPokemon!.sprites!.other != null &&
-                              selectedPokemon!.sprites!.other!.dream_world != null &&
-                              selectedPokemon!.sprites!.other!.dream_world!.front_default != null
-
-                              ?selectedPokemon!.sprites!.other!.dream_world!.front_default.toString()
-                              : '',
-                          height: 200,width: 254,
-                        ),
-                      ),
-
                     ],
                   ),
-
-               Expanded(
-                 child: ListView(
-                               children: [
-
-
-                  Container(
-
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 10,),
-                        AutoSizeText(selectedPokemon!.name.toString(),style: theme.displayLarge,),
-                        const SizedBox(height: 10,),
-                        Wrap(
-                          alignment: WrapAlignment.center,
-
-                          spacing: 15,
-                          children: [
-                            for(int i = 0; i < selectedPokemon!.types!.length; i++)
-                              PokemonTypeWidget(title:selectedPokemon!.types![i].type!.name.toString(),),
-
-                          ],
-                        ),
-                        const SizedBox(height: 20,),
-                      ],
+                  SizedBox(height: AppDimes().size20),
+                ],
+              ),
+              if (_selectedIndex == 0)
+                AboutPokemon(
+                  fetchedPokemon: fetchedPokemon,
+                  selectedPokemon: selectedPokemon,
+                ),
+              if (_selectedIndex == 1)
+                StatsPokemon(
+                  fetchedPokemon: fetchedPokemon,
+                  selectedPokemon: selectedPokemon,
+                ),
+              if (_selectedIndex == AppDimes().size2)
+                SimilarPokemon(
+                  fetchedPokemon: fetchedPokemon,
+                  selectedPokemon: selectedPokemon,
+                ),
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.all(AppDimes().size18),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppDimes().size60),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.kGrayColor,
+                offset: Offset(
+                  0,
+                  AppDimes().size4,
+                ),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(AppDimes().size12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                for (int i = 0; i < selectorLength; i += 1)
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: AppDimes().size18,
+                      right: AppDimes().size18,
+                    ),
+                    child: GestureDetector(
+                      onTap: () => setState(() {
+                        _selectedIndex = i;
+                      }),
+                      child: _selectedIndex == i
+                          ? Material(
+                              borderRadius:
+                                  BorderRadius.circular(AppDimes().size60),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: AppDimes().size12,
+                                  horizontal: AppDimes().size36,
+                                ),
+                                child: AutoSizeText(
+                                  selector.elementAtOrNull(i)?.toString() ?? '',
+                                  style: theme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : AutoSizeText(
+                              selector.elementAtOrNull(i)?.toString() ?? '',
+                              style: theme.bodyLarge
+                                  ?.copyWith(fontWeight: FontWeight.w500),
+                            ),
                     ),
                   ),
-
-
-                                 if (selectedIndex == 0)
-                                   const PokemonAbout(),
-                                 if (selectedIndex == 1)
-                                   const PokemonStats(),
-                                 if (selectedIndex == 2)
-                                   const PokemonSimilar(),
-                             ],
-                           ),
-               ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Container(
-                      decoration:  BoxDecoration(
-                        borderRadius: BorderRadius.circular(60),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: kGrayColor,
-                            offset: Offset(0, 4), // changes position of shadow
-                          ),
-                        ],
-
-                      ),
-                             child:  Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            for(int i = 0; i < selector.length; i++)
-                            Padding(
-                              padding: const EdgeInsets.only(right: 18.0,left: 18),
-                              child: GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    selectedIndex = i;
-                                  });
-
-                                },
-                                child: selectedIndex == i
-                                    ?Material(
-                                  borderRadius: BorderRadius.circular(60),
-                                 child:  Padding(
-                                   padding: const EdgeInsets.symmetric(horizontal: 36,vertical: 12),
-                                   child: AutoSizeText(selector[i],style: theme.bodyLarge
-                                   !.copyWith(fontWeight: FontWeight.w500),),
-                                 ),
-                                ): AutoSizeText(selector[i],style: theme.bodyLarge
-                                !.copyWith(fontWeight: FontWeight.w500),),
-                              ),
-                            ),
-
-
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-
-
-
-    ])
+              ],
+            ),
+          ),
+        ),
+      ]),
     );
-
   }
 }
-
-

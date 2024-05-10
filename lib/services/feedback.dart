@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-abstract class Failure extends Equatable {
+abstract class Feedback extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class TheFailure extends Failure {
-  final dynamic exception;
+class TheFailure extends Feedback {
+  final String exception;
   TheFailure (this.exception);
 
   @override
@@ -14,3 +14,4 @@ class TheFailure extends Failure {
     return exception.toString();
   }
 }
+

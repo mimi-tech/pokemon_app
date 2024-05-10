@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart';
 import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
-import 'package:phundit_app/commons/color.dart';
-import 'package:phundit_app/commons/dimes.dart';
+import 'package:phundit_app/commons/app_dimes.dart';
+import 'package:phundit_app/commons/app_strings.dart';
 import 'package:phundit_app/gen/assets.gen.dart';
 import 'package:phundit_app/l10n/l10n.dart';
 import 'package:phundit_app/routes/app_router.gr.dart';
@@ -15,122 +14,119 @@ import 'package:phundit_app/routes/app_router.gr.dart';
 @RoutePage()
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-  static final TextEditingController _search = TextEditingController();
-  final double radius = 60.0;
-  final double width = 6.0;
+  static final _search = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context).textTheme;
-    final dataState = context.read<DataBloc>().state;
+    final dataState = context.watch<PokemonBloc>().state;
+    const radius = 60.0;
+    const width = 6.0;
+
     return Scaffold(
       body: Container(
-
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/noise_background.png'),
+            image: AssetImage(AppStrings.backgroundImage),
             fit: BoxFit.cover,
           ),
         ),
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: kMargin),
+          margin: EdgeInsets.symmetric(horizontal: AppDimes().kMargin),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if(dataState is DataSuccess)
+              if (dataState is DataSuccess)
                 Column(
                   children: [
                     SvgPicture.asset(Assets.logo1),
-                    const SizedBox(height: 20,),
-                    RichText(
-                      text: TextSpan(
+                    SizedBox(height: AppDimes().size20),
+                    Text.rich(
+                      TextSpan(
                         text: l10n.poke,
                         style: theme.displayMedium,
-                        children:  <TextSpan>[
+                        children: <TextSpan>[
                           TextSpan(
-                            text: l10n.book, style: theme.displayMedium!
-                              .copyWith(color: Theme.of(context).primaryColor),
+                            text: l10n.book,
+                            style: theme.displayMedium?.copyWith(
+                              color: Theme.of(context).primaryColor,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 5,),
-                    AutoSizeText(l10n.largestPokemon, style:theme.bodyMedium),
-                    const SizedBox(height: 100,),
-                    TextFormField(
-                      cursorColor: Theme.of(context).primaryColor,
+                    SizedBox(height: AppDimes().size5),
+                    AutoSizeText(
+                      l10n.largestPokemon,
                       style: theme.bodyMedium,
+                    ),
+                    SizedBox(height: AppDimes().size100),
+                    TextFormField(
                       controller: _search,
-                      decoration:  InputDecoration(
-                          fillColor: Theme.of(context).primaryColor,
-                          hintText: l10n.enterPokemonName,
+                      decoration: InputDecoration(
+                        hintText: l10n.enterPokemonName,
+                        contentPadding: EdgeInsets.all(AppDimes().size20),
+                        suffixIcon: Container(
+                          padding: EdgeInsets.only(right: AppDimes().size18),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(AppDimes().size14),
+                            child: SvgPicture.asset(Assets.search),
+                          ),
+                        ),
+                        fillColor: Theme.of(context).primaryColor,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor,
+                            width: width,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(radius)),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor,
+                            width: width,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(radius)),
+                        ),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            width: width,
                             color: Theme.of(context).primaryColor,
-                          ),
-                          borderRadius: BorderRadius.circular(radius),
-                        ),
-                        enabledBorder:  OutlineInputBorder(
-                          borderSide:  BorderSide(
                             width: width,
-                            color: Theme.of(context).primaryColor,
                           ),
-                          borderRadius: BorderRadius.circular(radius),
-
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(radius)),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:  BorderSide(
-                            width: width,
-                            color:  Theme.of(context).primaryColor,
-                          ),
-
-                          borderRadius: BorderRadius.circular(radius),
-
-                        ),
-                        contentPadding:  const EdgeInsets.all(20),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.only(right: 18.0),
-                            child: Container(
-                              //padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).primaryColor,
-                                shape: BoxShape.circle,
-                              ),
-                              child:Padding(
-                                padding: const EdgeInsets.all(14.0),
-                                child: SvgPicture.asset(Assets.search),
-                              ) ,
-                            ),
-                          ),
                       ),
-
+                      style: theme.bodyMedium,
+                      cursorColor: Theme.of(context).primaryColor,
                     ),
-                    const SizedBox(height: 10,),
+                    SizedBox(height: AppDimes().size10),
                     GestureDetector(
-                      onTap: (){
-
-                        context.router.push( ViewAllRoute());
-                      },
-                      child: AutoSizeText(l10n.viewAll, style:theme.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.w500,
-                      decoration: TextDecoration.underline
-                      ),),
+                      onTap: () => context.router.push(const ViewAllRoute()),
+                      child: AutoSizeText(
+                        l10n.viewAll,
+                        style: theme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
                     ),
-
                   ],
                 ),
-              if(dataState is DataLoading)
+              if (dataState is DataLoading)
                 const Expanded(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  child: Center(child: CircularProgressIndicator()),
                 ),
-              if(dataState is DataError)
+              if (dataState is DataError)
                 Expanded(
-                  child: Center(
-                    child: Text(dataState.error.toString()),
-                  ),
+                  child: Center(child: Text(dataState.error.toString())),
                 ),
             ],
           ),

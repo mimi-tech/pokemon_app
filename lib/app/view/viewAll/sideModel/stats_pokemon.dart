@@ -1,76 +1,94 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/enum.dart';
-import 'package:phundit_app/commons/color.dart';
-import 'package:phundit_app/commons/dimes.dart';
+import 'package:phundit_app/app/view/viewAll/sideModel/pokemon_details.dart';
+import 'package:phundit_app/commons/app_colors.dart';
+import 'package:phundit_app/commons/app_dimes.dart';
 import 'package:phundit_app/l10n/l10n.dart';
-class PokemonStats extends StatelessWidget {
-  const PokemonStats({super.key});
+
+class StatsPokemon extends PokemonDetails {
+  const StatsPokemon({
+    required super.fetchedPokemon,
+    super.key,
+    required super.selectedPokemon,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildDetails(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     final l10n = context.l10n;
-    return  Column(
+
+    return Column(
       children: [
-        const Divider(color: kGrayColor,),
-        Center(child: AutoSizeText(l10n.stats,style: theme.titleMedium,)),
-        const SizedBox(height: 20,),
-
+        const Divider(color: AppColors.kGrayColor),
+        Center(
+          child: AutoSizeText(
+            l10n.stats,
+            style: theme.titleMedium,
+          ),
+        ),
+        SizedBox(height: AppDimes().size02),
         Container(
-
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [kWhiteColor, kGradientColor.withOpacity(0.2),kWhiteColor],
+              colors: [
+                AppColors.kWhiteColor,
+                AppColors.kGradientColor.withOpacity(AppDimes().size02),
+              ],
             ),
           ),
-
-          child:  Column(
-              children: [
-                for(var stats in selectedPokemon!.stats!)
-                  Padding(
-                    padding:  EdgeInsets.symmetric(vertical: 8.0,horizontal: kMargin),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            AutoSizeText(stats.stat!.name.toString(),
-                              style: theme.headlineSmall!.copyWith(fontWeight: FontWeight.w400),),
-                            Spacer(),
-
-                            SizedBox(
-                              width: 102,
-                              child: LinearProgressIndicator(
-                                value: stats.base_stat! / 100,
-                                valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
-                                backgroundColor: Color(0xFFCBCBCB),
-                                minHeight: 9,
-                              ),
-                            ),
-
-                            SizedBox(width: 20,),
-
-                            AutoSizeText('${stats.base_stat}',style: theme.bodyMedium!.copyWith(fontWeight: FontWeight.w600)),
-
-                          ],
-                        ),
-                        Divider(color: kGrayColor,)
-                      ],
-                    ),
+          child: Column(
+            children: [
+              for (var stats in selectedPokemon.stats ?? [])
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: AppDimes().size8,
+                    horizontal: AppDimes().kMargin,
                   ),
-                //const Divider(),
-              ],
-            )
-
-
-        )
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          AutoSizeText(
+                            stats?.stat?.name?.toString() ?? "",
+                            style: theme.headlineSmall
+                                ?.copyWith(fontWeight: FontWeight.w400),
+                          ),
+                          const Spacer(),
+                          SizedBox(
+                            width: AppDimes().size102,
+                            child: LinearProgressIndicator(
+                              value: stats?.base_stat / AppDimes().size100,
+                              backgroundColor: AppColors.kProgressColor,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Theme.of(context).primaryColor,
+                              ),
+                              minHeight: AppDimes().size9,
+                            ),
+                          ),
+                          SizedBox(width: AppDimes().size20),
+                          AutoSizeText(
+                            stats.base_stat.toString(),
+                            style: theme.bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                      const Divider(color: AppColors.kGrayColor),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return buildDetails(context);
   }
 }
