@@ -33,30 +33,6 @@ dart_code_metrics:
     - test/counter/cubit/counter_cubit_test.dart
     - test/counter/view/mock_counter_cubit.dart
   rules:
-    - prefer-extracting-callbacks:
-        allowed-line-count: 100
-    - avoid-nested-conditional-expressions:
-        acceptable-level: 2
-    - avoid-long-functions:
-        max-length: 200
-    - dispose-fields:
-        ignore-blocs: true
-    - no-equal-arguments:
-        ignored-parameters:
-          - height
-          - width 
-          - borderSide 
-          - left
-          - right
-          - bottom
-          - top 
-          - vertical
-          - horizontal
-    - prefer-moving-to-variable:
-        allowed-duplicated-chains: 5 
-    - avoid-similar-names:
-        show-similarity: true
-        similarity-threshold: 0.9          
     - avoid-dynamic:
         exclude:
           - lib/app/app_bloc_observer.dart
@@ -137,8 +113,33 @@ dart_code_metrics:
           - build-method
         exclude:
           - lib/routes/app_router.dart
+    - prefer-extracting-callbacks:
+        allowed-line-count: 100
+    - avoid-nested-conditional-expressions:
+        acceptable-level: 2
+    - avoid-long-functions:
+        max-length: 200
+    - dispose-fields:
+        ignore-blocs: true
+    - no-equal-arguments:
+        ignored-parameters:
+          - height
+          - width
+          - borderSide
+          - left
+          - right
+          - bottom
+          - top
+          - vertical
+          - horizontal
+    - prefer-moving-to-variable:
+        allowed-duplicated-chains: 5
+    - avoid-similar-names:
+        show-similarity: true
+        similarity-threshold: 0.9
 
   formatter:
     indent: 0
     line-length: 80
     cascading-widget-extensions: true
+

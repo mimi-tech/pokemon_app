@@ -72,5 +72,4 @@ flutter:
         - asset: assets/fonts/sofiaSans/SofiaSans-Medium.ttf
         - asset: assets/fonts/sofiaSans/SofiaSans-Bold.ttf
         - asset: assets/fonts/sofiaSans/SofiaSans-Light.ttf
-        - asset: assets/fonts/sofiaSans/SofiaSans-Semibold.ttf
         - asset: assets/fonts/sofiaSans/SofiaSans-ExtraBold.ttf
