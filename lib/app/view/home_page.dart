@@ -1,15 +1,15 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
-import 'package:phundit_app/commons/app_dimes.dart';
-import 'package:phundit_app/commons/app_strings.dart';
-import 'package:phundit_app/gen/assets.gen.dart';
-import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/routes/app_router.gr.dart';
+import "package:auto_route/auto_route.dart";
+import "package:auto_size_text/auto_size_text.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart";
+import "package:phundit_app/app/bloc/pokemon/pokemon_state.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/commons/app_strings.dart";
+import "package:phundit_app/gen/assets.gen.dart";
+import "package:phundit_app/l10n/l10n.dart";
+import "package:phundit_app/routes/app_router.gr.dart";
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -20,9 +20,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context).textTheme;
+    final appTheme = Theme.of(context);
     final dataState = context.watch<PokemonBloc>().state;
     const radius = 60.0;
-    const width = 6.0;
+    const textFildwidth = 6.0;
 
     return Scaffold(
       body: Container(
@@ -50,7 +51,7 @@ class HomePage extends StatelessWidget {
                           TextSpan(
                             text: l10n.book,
                             style: theme.displayMedium?.copyWith(
-                              color: Theme.of(context).primaryColor,
+                              color: appTheme.primaryColor,
                             ),
                           ),
                         ],
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
                         suffixIcon: Container(
                           padding: EdgeInsets.only(right: AppDimes().size18),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
+                            color: appTheme.primaryColor,
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
@@ -78,34 +79,34 @@ class HomePage extends StatelessWidget {
                             child: SvgPicture.asset(Assets.search),
                           ),
                         ),
-                        fillColor: Theme.of(context).primaryColor,
+                        fillColor: appTheme.primaryColor,
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor,
-                            width: width,
+                            color: appTheme.primaryColor,
+                            width: textFildwidth,
                           ),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(radius)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor,
-                            width: width,
+                            color: appTheme.primaryColor,
+                            width: AppDimes().size07,
                           ),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(radius)),
                         ),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor,
-                            width: width,
+                            color: appTheme.primaryColor,
+                            width: AppDimes().size005,
                           ),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(radius)),
                         ),
                       ),
                       style: theme.bodyMedium,
-                      cursorColor: Theme.of(context).primaryColor,
+                      cursorColor: appTheme.primaryColor,
                     ),
                     SizedBox(height: AppDimes().size10),
                     GestureDetector(
@@ -125,9 +126,7 @@ class HomePage extends StatelessWidget {
                   child: Center(child: CircularProgressIndicator()),
                 ),
               if (dataState is DataError)
-                Expanded(
-                  child: Center(child: Text(dataState.error.toString())),
-                ),
+                Expanded(child: Center(child: Text(dataState.error))),
             ],
           ),
         ),

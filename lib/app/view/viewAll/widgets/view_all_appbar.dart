@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/color_picker.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/theme_dialog.dart';
-import 'package:phundit_app/commons/app_dimes.dart';
-import 'package:phundit_app/gen/assets.gen.dart';
-import 'package:phundit_app/l10n/l10n.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:phundit_app/app/view/viewAll/widgets/color_picker.dart";
+import "package:phundit_app/app/view/viewAll/widgets/theme_dialog.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/gen/assets.gen.dart";
+import "package:phundit_app/l10n/l10n.dart";
 
 class ViewAllAppbar extends StatelessWidget implements PreferredSizeWidget {
   const ViewAllAppbar({super.key});
@@ -39,12 +39,12 @@ class ViewAllAppbar extends StatelessWidget implements PreferredSizeWidget {
           ),
           const Spacer(),
           ColorPicker(
-            color: Theme.of(context).primaryColor,
             containerSize: AppDimes().size42,
             onPressed: () {
               ThemeDialog().showMyDialog(context);
             },
             secondContainerSize: AppDimes().size32,
+            color: Theme.of(context).primaryColor,
           ),
         ],
       ),

@@ -1,10 +1,10 @@
-import 'package:equatable/equatable.dart';
-import 'package:phundit_app/model/pokemonnModel/pokemon_model.dart';
+import "package:equatable/equatable.dart";
+import "package:phundit_app/model/pokemonnModel/pokemon_model.dart";
 
 abstract class PokemonState extends Equatable {
+  const PokemonState();
   @override
   List<Object?> get props => [];
-  const PokemonState();
 }
 
 class DataInitial extends PokemonState {}
@@ -12,19 +12,17 @@ class DataInitial extends PokemonState {}
 class DataLoading extends PokemonState {}
 
 class DataSuccess extends PokemonState {
+  const DataSuccess(this.data);
   final List<PokemonModel> data;
 
   @override
   List<Object?> get props => [data];
-  const DataSuccess(this.data);
 }
 
 class DataError extends PokemonState {
+  const DataError(this.error);
   final String error;
 
   @override
   List<Object?> get props => [error];
-  const DataError(this.error);
 }
-
-

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:phundit_app/theme/app_text_styles.dart';
+import "package:flutter/material.dart";
+import "package:phundit_app/theme/app_text_styles.dart";
 
 class AppTextTheme {
   final kTextTheme = TextTheme(

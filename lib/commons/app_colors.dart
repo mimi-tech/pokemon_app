@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
-class AppColors{
+import "package:flutter/material.dart";
+
+class AppColors {
   static const kPinkColor = Color(0xFFE85382);
   static const kBlackColor = Color(0xFF000000);
   static const kHintColor = Color(0xFF7B7B7B);
@@ -18,5 +19,4 @@ class AppColors{
   static const kGradientColor1 = Color(0xFF7FCAD1);
   static const kGradientColor2 = Color(0xFF3DA0A9);
   static const kProgressColor = Color(0xFFCBCBCB);
-
 }

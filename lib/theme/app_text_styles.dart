@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:phundit_app/commons/app_colors.dart';
-import 'package:phundit_app/commons/app_dimes.dart';
-import 'package:phundit_app/gen/fonts.gen.dart';
+import "package:flutter/material.dart";
+import "package:phundit_app/commons/app_colors.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/gen/fonts.gen.dart";
 
 class AppTextStyles {
   static const primaryFamily = FontFamily.sofiaSans;
@@ -58,10 +58,7 @@ class AppTextStyles {
 
   final kCardTheme = CardTheme(
     shape: RoundedRectangleBorder(
-      side: BorderSide(
-        color: Colors.transparent,
-        width: AppDimes().size1,
-      ),
+      side: BorderSide(color: Colors.transparent, width: AppDimes().size1),
       borderRadius: const BorderRadius.all(Radius.circular(20.21)),
     ),
   );

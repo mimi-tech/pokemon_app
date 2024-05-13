@@ -1,24 +1,24 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:number_paginator/number_paginator.dart';
-import 'package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart';
-import 'package:phundit_app/app/bloc/Logic/pokemon_details_event.dart';
-import 'package:phundit_app/app/bloc/Logic/pokemon_details_state.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
-import 'package:phundit_app/app/view/viewAll/sideModel/side_model.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/view_all_appbar.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/nested_cards.dart';
-import 'package:phundit_app/commons/app_colors.dart';
-import 'package:phundit_app/commons/app_dimes.dart';
-import 'package:phundit_app/commons/app_strings.dart';
-import 'package:phundit_app/gen/assets.gen.dart';
-import 'package:collection/collection.dart';
-import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/model/pokemon/pokemon.dart';
+import "package:auto_route/auto_route.dart";
+import "package:auto_size_text/auto_size_text.dart";
+import "package:collection/collection.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:number_paginator/number_paginator.dart";
+import "package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart";
+import "package:phundit_app/app/bloc/Logic/pokemon_details_event.dart";
+import "package:phundit_app/app/bloc/Logic/pokemon_details_state.dart";
+import "package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart";
+import "package:phundit_app/app/bloc/pokemon/pokemon_state.dart";
+import "package:phundit_app/app/view/viewAll/sideModel/side_model.dart";
+import "package:phundit_app/app/view/viewAll/widgets/nested_cards.dart";
+import "package:phundit_app/app/view/viewAll/widgets/view_all_appbar.dart";
+import "package:phundit_app/commons/app_colors.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/commons/app_strings.dart";
+import "package:phundit_app/gen/assets.gen.dart";
+import "package:phundit_app/l10n/l10n.dart";
+import "package:phundit_app/model/pokemon/pokemon.dart";
 
 @RoutePage()
 class ViewAllScreen extends StatefulWidget {
@@ -34,9 +34,9 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
   final _widthValue = 1.0;
 
   final _numPages = 30;
+  final _endPage = 10;
 
   int _currentPage = 0;
-  final _endPage = 10;
 
   String? _filter;
 
@@ -46,17 +46,33 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
     final dataState = context.read<PokemonBloc>().state;
     // Dispatch the FetchPokemon event to start fetching data.
     if (dataState is DataSuccess) {
-      BlocProvider.of<PokemonDetailsBloc>(context).add(FetchPokemon(
-        _endPage,
-        dataState.data,
-        0,
-      ));
+      BlocProvider.of<PokemonDetailsBloc>(context).add(
+        FetchPokemon(_endPage, dataState.data, 0),
+      );
     }
     _search.addListener(() {
       setState(() {
         _filter = _search.text;
       });
     });
+  }
+
+  bool _handlePagination(PokemonState dataSuccess, int index) {
+    setState(() {
+      _currentPage = index;
+    });
+    final begi = _currentPage + 1;
+    final negativeNumber =
+        begi == 1 || begi == 0 ? 0 : begi * _endPage - _endPage;
+    context.read<PokemonDetailsBloc>().add(
+          FetchPokemon(
+            begi * _endPage,
+            dataSuccess is DataSuccess ? dataSuccess.data : [],
+            negativeNumber.abs(),
+          ),
+        );
+
+    return true;
   }
 
   @override
@@ -90,14 +106,11 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(_radius.toDouble()),
+                  borderRadius: BorderRadius.circular(_radius),
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.kBorderColor,
-                      offset: Offset(
-                        0,
-                        AppDimes().size4,
-                      ),
+                      offset: Offset(0, AppDimes().size4),
                     ),
                   ],
                 ),
@@ -146,10 +159,7 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
               SizedBox(height: AppDimes().size20),
               if (dataState is DataSuccess)
                 BlocBuilder<PokemonDetailsBloc, PokemonDetailsState>(
-                  builder: (
-                    context,
-                    state,
-                  ) {
+                  builder: (context, state) {
                     if (state is PokemonInitial) {
                       return Center(
                         child: CircularProgressIndicator(
@@ -170,15 +180,12 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                           slivers: [
                             SliverList(
                               delegate: SliverChildBuilderDelegate(
-                                (
-                                  context,
-                                  index,
-                                ) {
-                                  String pokemonName =
+                                (ctx, index) {
+                                  final pokemonName =
                                       pokemon.elementAtOrNull(index)?.name ??
                                           "";
 
-                                  return _filter == null || _filter == ''
+                                  return _filter == null || _filter == ""
                                       ? Column(
                                           children: [
                                             SizedBox(height: AppDimes().size30),
@@ -196,7 +203,7 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                                                 _filter
                                                         ?.toString()
                                                         .toLowerCase() ??
-                                                    '',
+                                                    "",
                                               )
                                           ? Column(
                                               children: [
@@ -224,7 +231,7 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                         ),
                       );
                     } else if (state is PokemonError) {
-                      String error = 'Error: ${state.error}';
+                      final error = "Error: ${state.error}";
 
                       return Center(child: AutoSizeText(error));
                     }
@@ -249,21 +256,10 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                 padding: EdgeInsets.all(AppDimes().size18),
                 child: NumberPaginator(
                   numberPages: _numPages,
-                  onPageChange: (int index) {
-                    setState(() {
-                      _currentPage = index;
-                    });
-                    int b = _currentPage + 1;
-                    int negativeNumber =
-                        b == 1 || b == 0 ? 0 : b * _endPage - _endPage;
-                    context.read<PokemonDetailsBloc>().add(
-                          FetchPokemon(
-                            b * _endPage,
-                            dataState.data,
-                            negativeNumber.abs(),
-                          ),
-                        );
-                  },
+                  onPageChange: (int index) => _handlePagination(
+                    dataState,
+                    index,
+                  ),
                   config: NumberPaginatorUIConfig(
                     height: AppDimes().size40,
                     buttonShape: BeveledRectangleBorder(

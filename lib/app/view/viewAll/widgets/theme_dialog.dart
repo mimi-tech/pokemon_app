@@ -1,24 +1,20 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/color_picker.dart';
-import 'package:phundit_app/commons/app_colors.dart';
-import 'package:phundit_app/commons/app_dimes.dart';
-import 'package:phundit_app/commons/app_strings.dart';
-import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/theme/theme_cubit.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:phundit_app/app/view/viewAll/widgets/color_picker.dart";
+import "package:phundit_app/commons/app_colors.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/commons/app_strings.dart";
+import "package:phundit_app/l10n/l10n.dart";
+import "package:phundit_app/theme/theme_cubit.dart";
 
 class ThemeDialog {
   Color selectedColor = AppColors.kPinkColor;
   void showMyDialog(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     final l10n = context.l10n;
-    final themeColor = [
-      AppColors.kPinkColor,
-      Colors.cyan,
-      Colors.orange,
-    ];
+    final themeColor = [AppColors.kPinkColor, Colors.cyan, Colors.orange];
 
     unawaited(
       showDialog(
@@ -27,10 +23,7 @@ class ThemeDialog {
           return AlertDialog(
             titlePadding: EdgeInsets.zero,
             content: StatefulBuilder(
-              builder: (
-                BuildContext context,
-                StateSetter setState,
-              ) {
+              builder: (BuildContext ctx, StateSetter setState) {
                 return SizedBox(
                   height:
                       MediaQuery.sizeOf(context).height * AppDimes().size025,
@@ -76,17 +69,14 @@ class ThemeDialog {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              for (int i = 0; i < themeColor.length; i += 1)
+                              for (int nums = 0;
+                                  nums < themeColor.length;
+                                  nums += 1)
                                 ColorPicker(
-                                  borderColor: selectedColor ==
-                                          themeColor.elementAtOrNull(i)
-                                      ? AppColors.kBlackColor
-                                      : Colors.transparent,
-                                  color: themeColor.elementAtOrNull(i),
                                   containerSize: AppDimes().size55,
                                   onPressed: () {
                                     selectedColor =
-                                        themeColor.elementAtOrNull(i) ??
+                                        themeColor.elementAtOrNull(nums) ??
                                             Colors.pink;
 
                                     context
@@ -94,6 +84,11 @@ class ThemeDialog {
                                         .changeThemeColor(selectedColor);
                                   },
                                   secondContainerSize: AppDimes().size45,
+                                  borderColor: selectedColor ==
+                                          themeColor.elementAtOrNull(nums)
+                                      ? AppColors.kBlackColor
+                                      : Colors.transparent,
+                                  color: themeColor.elementAtOrNull(nums),
                                 ),
                             ],
                           ),

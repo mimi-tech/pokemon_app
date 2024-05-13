@@ -1,17 +1,17 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-import 'package:phundit_app/app/view/viewAll/sideModel/pokemon_details.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/about_widget.dart';
-import 'package:phundit_app/commons/app_colors.dart';
-import 'package:phundit_app/commons/app_dimes.dart';
-import 'package:phundit_app/commons/app_strings.dart';
-import 'package:phundit_app/l10n/l10n.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:flutter/material.dart";
+import "package:phundit_app/app/view/viewAll/sideModel/pokemon_details.dart";
+import "package:phundit_app/app/view/viewAll/widgets/about_widget.dart";
+import "package:phundit_app/commons/app_colors.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/commons/app_strings.dart";
+import "package:phundit_app/l10n/l10n.dart";
 
 class AboutPokemon extends PokemonDetails {
   const AboutPokemon({
     required super.fetchedPokemon,
-    super.key,
     required super.selectedPokemon,
+    super.key,
   });
 
   @override
@@ -23,10 +23,7 @@ class AboutPokemon extends PokemonDetails {
     return Column(
       children: [
         const Divider(color: AppColors.kGrayColor),
-        AutoSizeText(
-          l10n.about,
-          style: theme.titleMedium,
-        ),
+        AutoSizeText(l10n.about, style: theme.titleMedium),
         SizedBox(height: AppDimes().size20),
         Container(
           decoration: const BoxDecoration(
@@ -62,9 +59,9 @@ class AboutPokemon extends PokemonDetails {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        for (int i = 0;
-                            abilities != null && i < abilities.length;
-                            i += 1)
+                        for (int nums = 0;
+                            abilities != null && nums < abilities.length;
+                            nums += 1)
                           Row(
                             children: [
                               Icon(
@@ -75,11 +72,11 @@ class AboutPokemon extends PokemonDetails {
                               SizedBox(width: AppDimes().size5),
                               AutoSizeText(
                                 abilities
-                                        .elementAtOrNull(i)
+                                        .elementAtOrNull(nums)
                                         ?.ability
                                         ?.name
                                         ?.toString() ??
-                                    '',
+                                    "",
                                 style: theme.bodyLarge
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),

@@ -1,16 +1,12 @@
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_event.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
-import 'package:phundit_app/model/pokemonnModel/pokemon_model.dart';
-import 'package:phundit_app/services/pokemon_service.dart';
+import "package:hydrated_bloc/hydrated_bloc.dart";
+import "package:phundit_app/app/bloc/pokemon/pokemon_event.dart";
+import "package:phundit_app/app/bloc/pokemon/pokemon_state.dart";
+import "package:phundit_app/model/pokemonnModel/pokemon_model.dart";
+import "package:phundit_app/services/pokemon_service.dart";
 
 class PokemonBloc extends HydratedBloc<PokemonEvent, PokemonState> {
-  final PokemonService repository;
   PokemonBloc(this.repository) : super(DataInitial()) {
-    on<LoadData>((
-      event,
-      emit,
-    ) async {
+    on<LoadData>((event, emit) async {
       emit(DataLoading());
       final result = await repository.fetchPokemon();
       result.when(
@@ -23,11 +19,12 @@ class PokemonBloc extends HydratedBloc<PokemonEvent, PokemonState> {
       );
     });
   }
+  final PokemonService repository;
 
   @override
   PokemonState? fromJson(Map<String, dynamic> json) {
     try {
-      final pokemonList = (json['pokemonList'] as List)
+      final pokemonList = (json["pokemonList"] as List)
           .map((item) => PokemonModel.fromJson(item as Map<String, Object>))
           .toList();
 
@@ -40,7 +37,7 @@ class PokemonBloc extends HydratedBloc<PokemonEvent, PokemonState> {
   @override
   Map<String, dynamic>? toJson(PokemonState state) {
     return state is DataSuccess
-        ? {'pokemonList': state.data.map((e) => e.toJson()).toList()}
+        ? {"pokemonList": state.data.map((e) => e.toJson()).toList()}
         : null;
   }
 }

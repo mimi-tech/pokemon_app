@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import "package:equatable/equatable.dart";
 
 abstract class Feedback extends Equatable {
   @override
@@ -6,12 +6,11 @@ abstract class Feedback extends Equatable {
 }
 
 class TheFailure extends Feedback {
+  TheFailure(this.exception);
   final String exception;
-  TheFailure (this.exception);
 
   @override
   String toString() {
-    return exception.toString();
+    return exception;
   }
 }
-

@@ -1,36 +1,131 @@
-#include: package:very_good_analysis/analysis_options.5.1.0.yaml
-include: package:flutter_lints/flutter.yaml
-
+include: package:very_good_analysis/analysis_options.5.1.0.yaml
 linter:
   rules:
-    # Enable some DCM rules
-dart_code_metrics:  
+    public_member_api_docs: false
+    prefer_single_quotes: false
+    prefer_double_quotes: true
+    lines_longer_than_80_chars: false
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*gr.dart"
+    - "lib/firebase_options.dart"
+
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
+dart_code_metrics:
+  extends:
+    - package:dart_code_metrics_presets/all.yaml
+    - package:dart_code_metrics_presets/bloc.yaml
+    - package:dart_code_metrics_presets/provider.yaml
+    - package:dart_code_metrics_presets/flutter_hooks.yaml
+    - package:dart_code_metrics_presets/intl.yaml
+    - package:dart_code_metrics_presets/pub.yaml
+    - package:dart_code_metrics_presets/metrics_recommended.yaml
+    - recommended
+  rules-exclude:
+    - lib/bootstrap.dart
+    - test/counter/cubit/counter_cubit_test.dart
+    - test/counter/view/mock_counter_cubit.dart
   rules:
-    - avoid-non-null-assertion
-    - no-magic-number
+    - prefer-extracting-callbacks:
+        allowed-line-count: 100
+    - avoid-nested-conditional-expressions:
+        acceptable-level: 2
+    - avoid-long-functions:
+        max-length: 200
+    - dispose-fields:
+        ignore-blocs: true
+    - no-equal-arguments:
+        ignored-parameters:
+          - height
+          - width 
+          - borderSide 
+          - left
+          - right
+          - bottom
+          - top 
+          - vertical
+          - horizontal
+    - prefer-moving-to-variable:
+        allowed-duplicated-chains: 5 
+    - avoid-similar-names:
+        show-similarity: true
+        similarity-threshold: 0.9          
+    - avoid-dynamic:
+        exclude:
+          - lib/app/app_bloc_observer.dart
+    - prefer-match-file-name:
+        exclude:
+          - test/**
+          - lib/l10n/**
+    - avoid-shadowing:
+        ignore-static: true
+        ignore-fields: true
+        ignore-parameters: true
+    - avoid-nullable-interpolation:
+        ignored-invocations:
+          - log
+          - print
+          - debugPrint
+          - v
+          - t
+          - d
+          - i
+          - w
+          - e
+          - wtf
+          - f
+    - avoid-ignoring-return-values:
+        exclude:
+          - lib/main_development.dart
+          - lib/main_production.dart
+          - lib/main_staging.dart
+          - test/**
+    - no-magic-string:
+        allow-only-once: true
+        ignored-invocations:
+          - log
+          - print
+          - debugPrint
+          - v
+          - t
+          - d
+          - i
+          - w
+          - e
+          - wtf
+          - f
+        exclude:
+          - test/**
+    - prefer-static-class:
+        ignore-private: true
+        ignore-names:
+          - bootstrap
+          - (.*)Provider
+          - use(.*)
+    - parameters-ordering:
+        ignore-overridden: true
+        required: 'first'
+        default: 'last'
     - arguments-ordering:
         last:
           - child
           - children
-    - format-comment
-    - prefer-static-class:
-        ignore-annotations:
-          - allowedAnnotation
-        ignore-private: true
-        ignore-names:
-          - (.*)Provider
-          - use(.*)
-    - prefer-moving-to-variable:
-        allowed-duplicated-chains: 20
     - member-ordering:
         ignore-mixins: false
         ignore-extensions: false
         ignore-extension-types: false
         ignore-enums: false 
         order:
+          - constructors
           - public-fields
           - private-fields
-          - constructors
           - close-method
           - dispose-method
         widgets-order:
@@ -40,129 +135,10 @@ dart_code_metrics:
           - did-update-widget-method
           - dispose-method 
           - build-method
-    - no-magic-string:
-        ignored-invocations:
-          - print
-          - debugPrint
-          - log
-          - AssetImage
-    - newline-before-return  
-    - avoid-explicit-type-declaration 
-    - prefer-match-file-name 
-    - prefer-dedicated-media-query-methods
-    - avoid-shadowing:
-        ignore-static: true
-        ignore-fields: true
-        ignore-parameters: true
-        ignored-names:
-          - context
-    - avoid-nullable-tostring
-    - avoid-unsafe-collection-methods
-    - no-equal-arguments:
-        ignored-parameters:
-          - height
-          - width
-          - horizontal
-          - vertical
-          - borderRadius
-          - left
-          - top
-          - right
-          - bottom
-          - width
-          - height
-          - radius
-    - parameters-ordering   
-    - avoid-dynamic
-    - prefer-correct-identifier-length:
-        max-identifier-length: 50
-        min-identifier-length: 1
-    - prefer-prefixed-global-constants
-    - prefer-declaring-const-constructor
-    - prefer-extracting-callbacks:
-        ignored-named-arguments:
-          - onPressed
-        allowed-line-count: 100
-    - prefer-const-border-radius
-    - prefer-addition-subtraction-assignments
-    - avoid-non-ascii-symbols:
-        ignored-invocations:
-          - print
-          - debugPrint
-          - switch
-          - EnumsHolder
-    - avoid-stateless-widget-initialized-fields
-    - avoid-async-call-in-sync-function
-    - prefer-widget-private-members
-    - avoid-ignoring-return-values
-    - avoid-inferrable-type-arguments
-    - avoid-redundant-else
-    - prefer-type-over-var
-    - prefer-single-widget-per-file
-    - prefer-correct-error-name:
-        allowed-names:
-          - err
-    - avoid-wrapping-in-padding
-    - prefer-text-rich
-    - prefer-number-format
-    - avoid-duplicate-collection-elements
-    - avoid-read-inside-build
-    - avoid-single-child-column-or-row
-    - newline-before-case
-    - prefer-overriding-parent-equality
-    - prefer-action-button-tooltip
-    - prefer-define-hero-tag
-    - avoid-shrink-wrap-in-lists
-    - avoid-nested-conditional-expressions:
-        acceptable-level: 2
-    - prefer-commenting-analyzer-ignores
-    - avoid-redundant-async
-    - avoid-passing-async-when-sync-expected
-    - no-equal-switch-case
-    - prefer-correct-json-casts
-    - prefer-returning-conditional-expressions
-    - prefer-unwrapping-future-or
-    - avoid-collection-mutating-methods:
-        ignore-local: true
-        additional-methods:
-          - contains
-    - prefer-immediate-return
-    - binary-expression-operand-order
-    - avoid-similar-names:
-        show-similarity: true
-        similarity-threshold: 0.9
-    - list-all-equatable-fields
-    - prefer-conditional-expressions:
-        ignore-nested: true
-    - avoid-returning-void
-    - avoid-passing-default-values
-    - prefer-typedefs-for-callbacks:
-        ignore-fields: false
-        ignore-parameters: false
-        ignore-type-arguments: false
-        ignore-return-types: false
-    - avoid-unnecessary-futures
-    - avoid-long-functions:
-          max-length: 1000
-          ignored-names:
-            - some
-            - name
-    - prefer-trailing-comma:
-        break-on: 2
+        exclude:
+          - lib/routes/app_router.dart
 
-    
-      
-
-      
-
-      
-    
-
-
-
-
-
-
-
-
-
+  formatter:
+    indent: 0
+    line-length: 80
+    cascading-widget-extensions: true

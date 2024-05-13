@@ -1,78 +1,61 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phundit_app/app/bloc/Logic/pokemon_details_event.dart';
-import 'package:phundit_app/app/bloc/Logic/pokemon_details_state.dart';
-import 'package:phundit_app/commons/app_dimes.dart';
-import 'package:phundit_app/model/pokemon/pokemon.dart';
-import 'package:phundit_app/services/pokemon_service.dart';
-import 'package:xml/xml.dart';
+// ignore_for_file: omit_local_variable_types
+
+/*
+ When I added an int as an annotation. I was still getting the error
+ */
+
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:phundit_app/app/bloc/Logic/pokemon_details_event.dart";
+import "package:phundit_app/app/bloc/Logic/pokemon_details_state.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/model/pokemon/pokemon.dart";
+import "package:phundit_app/services/pokemon_service.dart";
+import "package:xml/xml.dart";
 
 class PokemonDetailsBloc
     extends Bloc<PokemonDetailsEvent, PokemonDetailsState> {
-  final PokemonService repository;
-
   PokemonDetailsBloc(this.repository) : super(const PokemonInitial()) {
-    on<FetchPokemon>((
-      event,
-      emit,
-    ) async {
+    on<FetchPokemon>((event, emit) async {
       try {
         emit(const PokemonLoading());
 
-        List<Pokemon> fetchedData = [];
-        for (int i = event.start; i < event.end; i += 1) {
+        final fetchedData = <Pokemon>[];
+
+        for (int nums = event.start; nums < event.end; nums += 1) {
           final result = await repository.fetchPokemonDetails(
-            event.pokemonData.elementAtOrNull(i)?.url.toString() ?? '',
+            event.pokemonData.elementAtOrNull(nums)?.url?.toString() ?? "",
           );
 
-          result.when(
-            (success) {
-              fetchedData.add(success);
-            },
-            (error) {
-              emit(PokemonError(error.toString()));
-            },
-          );
+          result.when(fetchedData.add, (error) {
+            emit(PokemonError(error.toString()));
+          });
         }
 
-        emit(PokemonLoaded(
-          fetchedData,
-          Pokemon(),
-        ));
-      } catch (err) {
-        emit(PokemonError(err.toString()));
+        emit(PokemonLoaded(fetchedData, Pokemon()));
+      } catch (error) {
+        emit(PokemonError(error.toString()));
       }
     });
 
-    on<ItemSelected>((
-      event,
-      emit,
-    ) {
-      emit(PokemonLoaded(
-        event.fetchedPokemon,
-        event.selectedPokemon,
-      ));
+    on<ItemSelected>((event, emit) {
+      emit(PokemonLoaded(event.fetchedPokemon, event.selectedPokemon));
     });
   }
+  final PokemonService repository;
 }
 
 class CardBloc extends Bloc<CardEvent, CardState> {
   CardBloc() : super(CardInitial()) {
-    on<CardTapped>((
-      event,
-      emit,
-    ) async {
+    on<CardTapped>((event, emit) async {
       emit(CardShowingButton(event.index));
     });
   }
 }
 
 class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
-  PokemonListBloc() : super(const InitialPokemonListState()) {
-    on<UpdateTypes>((
-      event,
-      emit,
-    ) {
+  PokemonListBloc() : super(InitialPokemonListState()) {
+    on<UpdateTypes>((event, emit) {
       final selectedTypes = event.types;
       final pokemonList = event.pokemonList;
 
@@ -80,10 +63,7 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
         pokemonList,
         selectedTypes,
       );
-      emit(LoadedPokemonListState(
-        matchedPokemon,
-        selectedTypes,
-      ));
+      emit(LoadedPokemonListState(matchedPokemon, selectedTypes));
     });
   }
 }
@@ -98,7 +78,7 @@ class DominantColor {
       final matchedPokemon = <Pokemon>[];
       for (final pokemon in pokemonList) {
         for (final typeMap in typeList) {
-          final typeName = typeMap.type?.name as String;
+          final typeName = typeMap.type?.name;
           if (pokemon.types?.any((type) => type.type?.name == typeName) ??
               false) {
             matchedPokemon.add(pokemon);
@@ -108,7 +88,7 @@ class DominantColor {
       }
 
       return matchedPokemon;
-    } catch (err) {
+    } catch (error) {
       return [];
     }
   }
@@ -120,22 +100,21 @@ class DominantColor {
   }
 
   List<Color> getMostThreeRepeatedColors(List<Color> colors) {
-    Map<Color, int> colorCount = {};
-    for (Color color in colors) {
+    final colorCount = <Color, int>{};
+    int num;
+    for (final color in colors) {
       colorCount[color] = (colorCount[color] ?? 0) + 1;
     }
 
-    List<MapEntry<Color, int>> sortedColors = colorCount.entries.toList()
-      ..sort((
-        a,
-        b,
-      ) =>
-          b.value.compareTo(a.value));
+    final sortedColors = colorCount.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
 
-    List<Color> mostRepeatedColors = [];
-    for (int i = 0; i < sortedColors.length && i < AppDimes().size3; i += 1) {
+    final mostRepeatedColors = <Color>[];
+    for (num = 0;
+        num < sortedColors.length && num < AppDimes().size3;
+        num += 1) {
       mostRepeatedColors
-          .add(sortedColors.elementAtOrNull(i)?.key ?? Colors.pink);
+          .add(sortedColors.elementAtOrNull(num)?.key ?? Colors.pink);
     }
 
     return mostRepeatedColors;
@@ -144,24 +123,21 @@ class DominantColor {
   List<Color> parseSvgForDominantColors(String svgString) {
     final document = XmlDocument.parse(svgString);
 
-    List<Color> colors = [];
-    RegExp colorRegExp = RegExp(r'fill="#([0-9a-fA-F]{6})"');
-    Iterable<Match> matches = colorRegExp.allMatches(document.toString());
+    final colors = <Color>[];
+    final colorRegExp = RegExp('fill="#([0-9a-fA-F]{6})"');
+    final matches = colorRegExp.allMatches(document.toString());
 
-    for (Match match in matches) {
-      String? hexColor = match.group(1);
+    for (final match in matches) {
+      final hexColor = match.group(1);
       if (hexColor != null) {
-        int colorValue = int.parse(
-          hexColor,
-          radix: 16,
-        );
-        Color color = Color(colorValue + 0xFF000000);
+        final colorValue = int.parse(hexColor, radix: 16);
+        final color = Color(colorValue + 0xFF000000);
         colors.add(color);
       }
     }
 
-    List<Color> mostRepeatedColors = getMostThreeRepeatedColors(colors);
-    int secondRepeatedColor = 2;
+    final mostRepeatedColors = getMostThreeRepeatedColors(colors);
+    const secondRepeatedColor = 2;
 
     return [
       mostRepeatedColors.elementAtOrNull(1) ?? Colors.pink,

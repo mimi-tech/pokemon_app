@@ -1,33 +1,33 @@
-import 'dart:async';
-import 'dart:developer';
+import "dart:async";
+import "dart:developer";
 
-import 'package:flutter/widgets.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:phundit_app/services/error_handler.dart';
+import "package:flutter/widgets.dart";
+import "package:hydrated_bloc/hydrated_bloc.dart";
+import "package:path_provider/path_provider.dart";
+import "package:phundit_app/services/error_handler.dart";
 
 class Bootstrap extends BlocObserver {
   const Bootstrap();
 
   @override
   void onChange(
-    BlocBase bloc,
-    Change change,
+    BlocBase<dynamic> bloc,
+    Change<dynamic> change,
   ) {
     super.onChange(
       bloc,
       change,
     );
-    log('onChange(${bloc.runtimeType}, $change)');
+    log("onChange(${bloc.runtimeType}, $change)");
   }
 
   @override
   void onError(
-    BlocBase bloc,
+    BlocBase<dynamic> bloc,
     Object error,
     StackTrace stackTrace,
   ) {
-    log('onError(${bloc.runtimeType}, $error, $stackTrace)');
+    log("onError(${bloc.runtimeType}, $error, $stackTrace)");
     super.onError(
       bloc,
       error,

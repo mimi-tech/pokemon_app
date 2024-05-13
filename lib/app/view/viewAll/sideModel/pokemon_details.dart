@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:phundit_app/model/pokemon/pokemon.dart';
+import "package:flutter/material.dart";
+import "package:phundit_app/model/pokemon/pokemon.dart";
 
 abstract class PokemonDetails extends StatelessWidget {
   const PokemonDetails({
     required this.fetchedPokemon,
-    super.key,
     required this.selectedPokemon,
+    super.key,
   });
   final Pokemon selectedPokemon;
   final List<Pokemon> fetchedPokemon;

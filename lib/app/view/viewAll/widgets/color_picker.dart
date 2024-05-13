@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:phundit_app/commons/app_colors.dart';
-import 'package:phundit_app/commons/app_dimes.dart';
+import "package:flutter/material.dart";
+import "package:phundit_app/commons/app_colors.dart";
+import "package:phundit_app/commons/app_dimes.dart";
 
 class ColorPicker extends StatelessWidget {
   const ColorPicker({
-    this.borderColor,
-    this.color,
     required this.containerSize,
-    super.key,
     required this.onPressed,
     required this.secondContainerSize,
+    this.borderColor,
+    this.color,
+    super.key,
   });
 
   final VoidCallback onPressed;
@@ -35,10 +35,7 @@ class ColorPicker extends StatelessWidget {
         height: containerSize.toDouble(),
         child: Center(
           child: Container(
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
             width: secondContainerSize.toDouble(),
             height: secondContainerSize.toDouble(),
           ),

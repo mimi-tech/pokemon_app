@@ -1,10 +1,10 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
+import "package:flutter/foundation.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'pokemon.freezed.dart';
-part 'pokemon.g.dart';
+part "pokemon.freezed.dart";
+part "pokemon.g.dart";
 
 @Freezed()
 class Pokemon with _$Pokemon {
@@ -28,9 +28,9 @@ class Pokemon with _$Pokemon {
 @Freezed()
 class Ability with _$Ability {
   factory Ability({
+    required int slot,
     NamedAPIResource? ability,
     bool? isHidden,
-    required int slot,
   }) = _Ability;
   const Ability._();
 
@@ -40,10 +40,7 @@ class Ability with _$Ability {
 
 @Freezed()
 class NamedAPIResource with _$NamedAPIResource {
-  factory NamedAPIResource({
-    String? name,
-    String? url,
-  }) = _NamedAPIResource;
+  factory NamedAPIResource({String? name, String? url}) = _NamedAPIResource;
   const NamedAPIResource._();
 
   factory NamedAPIResource.fromJson(Map<String, dynamic> json) =>
@@ -52,10 +49,7 @@ class NamedAPIResource with _$NamedAPIResource {
 
 @Freezed()
 class Form with _$Form {
-  factory Form({
-    String? name,
-    String? url,
-  }) = _Form;
+  factory Form({String? name, String? url}) = _Form;
   const Form._();
 
   factory Form.fromJson(Map<String, dynamic> json) => _$FormFromJson(json);
@@ -63,10 +57,7 @@ class Form with _$Form {
 
 @Freezed()
 class Species with _$Species {
-  factory Species({
-    String? name,
-    String? url,
-  }) = _Species;
+  factory Species({String? name, String? url}) = _Species;
   const Species._();
 
   factory Species.fromJson(Map<String, dynamic> json) =>
@@ -92,10 +83,8 @@ class Other with _$Other {
 
 @Freezed()
 class DreamWorld with _$DreamWorld {
-  factory DreamWorld({
-    String? front_default,
-    String? front_female,
-  }) = _DreamWorld;
+  factory DreamWorld({String? front_default, String? front_female}) =
+      _DreamWorld;
   const DreamWorld._();
 
   factory DreamWorld.fromJson(Map<String, dynamic> json) =>
@@ -104,11 +93,7 @@ class DreamWorld with _$DreamWorld {
 
 @Freezed()
 class Stat with _$Stat {
-  factory Stat({
-    int? base_stat,
-    int? effort,
-    NamedAPIResource? stat,
-  }) = _Stat;
+  factory Stat({int? base_stat, int? effort, NamedAPIResource? stat}) = _Stat;
   const Stat._();
 
   factory Stat.fromJson(Map<String, dynamic> json) => _$StatFromJson(json);
@@ -116,10 +101,7 @@ class Stat with _$Stat {
 
 @Freezed()
 class Types with _$Types {
-  factory Types({
-    int? slot,
-    NamedAPIResource? type,
-  }) = _Types;
+  factory Types({int? slot, NamedAPIResource? type}) = _Types;
   const Types._();
 
   factory Types.fromJson(Map<String, dynamic> json) => _$TypesFromJson(json);

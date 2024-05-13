@@ -1,10 +1,10 @@
-import 'package:equatable/equatable.dart';
-import 'package:phundit_app/model/pokemon/pokemon.dart';
+import "package:equatable/equatable.dart";
+import "package:phundit_app/model/pokemon/pokemon.dart";
 
 abstract class PokemonDetailsState extends Equatable {
+  const PokemonDetailsState();
   @override
   List<Object> get props => [];
-  const PokemonDetailsState();
 }
 
 class PokemonInitial extends PokemonDetailsState {
@@ -16,81 +16,64 @@ class PokemonLoading extends PokemonDetailsState {
 }
 
 class PokemonLoaded extends PokemonDetailsState {
+  const PokemonLoaded(this.pokemon, this.pokemonData);
   final List<Pokemon> pokemon;
   final Pokemon pokemonData;
-
   @override
-  List<Object> get props => [
-        pokemon,
-        pokemonData,
-      ];
-  const PokemonLoaded(
-    this.pokemon,
-    this.pokemonData,
-  );
+  List<Object> get props => [pokemon, pokemonData];
 }
 
 class PokemonError extends PokemonDetailsState {
+  const PokemonError(this.error);
   final String error;
-
   @override
   List<Object> get props => [error];
-  const PokemonError(this.error);
 }
 
 abstract class PokemonListState extends Equatable {
+  const PokemonListState();
   @override
   List<Object> get props => [];
-  const PokemonListState();
 }
 
 class InitialPokemonListState extends PokemonListState {
-  final pokemonList = const <Pokemon>[];
+  InitialPokemonListState();
+  final pokemonList = <Pokemon>[];
   final selectedTypes = const <Map<String, dynamic>>[];
-  const InitialPokemonListState();
 }
 
 class LoadedPokemonListState extends PokemonListState {
+  const LoadedPokemonListState(this.pokemonList, this.selectedTypes);
   final List<Pokemon> pokemonList;
   final List<Types> selectedTypes;
-
   @override
-  List<Object> get props => [
-        pokemonList,
-        selectedTypes,
-      ];
-  const LoadedPokemonListState(
-    this.pokemonList,
-    this.selectedTypes,
-  );
+  List<Object> get props => [pokemonList, selectedTypes];
 }
 
 class ErrorPokemonListState extends PokemonDetailsState {
+  const ErrorPokemonListState(this.error);
   final String error;
-
   @override
   List<Object> get props => [error];
-  const ErrorPokemonListState(this.error);
 }
 
 abstract class HoverState extends Equatable {
+  const HoverState();
   @override
   List<Object> get props => [];
-  const HoverState();
 }
 
 abstract class CardState extends Equatable {
+  const CardState();
   @override
   List<Object> get props => [];
-  const CardState();
 }
 
 class CardInitial extends CardState {}
 
 class CardShowingButton extends CardState {
+  const CardShowingButton(this.selectedIndex);
   final int selectedIndex;
-
   @override
   List<Object> get props => [selectedIndex];
-  const CardShowingButton(this.selectedIndex);
 }

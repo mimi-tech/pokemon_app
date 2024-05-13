@@ -1,14 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
+import "dart:convert";
+import "dart:io";
 
-import 'package:multiple_result/multiple_result.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:phundit_app/commons/app_dimes.dart';
-import 'package:phundit_app/commons/app_strings.dart';
-import 'package:phundit_app/model/pokemon/pokemon.dart';
-import 'package:phundit_app/model/pokemonnModel/pokemon_model.dart';
-import 'package:phundit_app/services/feedback.dart';
+import "package:http/http.dart" as http;
+import "package:multiple_result/multiple_result.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/commons/app_strings.dart";
+import "package:phundit_app/model/pokemon/pokemon.dart";
+import "package:phundit_app/model/pokemonnModel/pokemon_model.dart";
+import "package:phundit_app/services/feedback.dart";
 
 abstract class PokemonService {
   Future<Result<List<PokemonModel>, TheFailure>> fetchPokemon();
@@ -22,11 +21,11 @@ class PokeMonServices implements PokemonService {
   Future<Result<List<PokemonModel>, TheFailure>> fetchPokemon() async {
     try {
       final response = await http.get(
-        Uri.parse('https://pokeapi.co/api/v2/pokemon/?offset=1&limit=500'),
-        headers: {'Content-Type': 'application/json'},
+        Uri.parse("https://pokeapi.co/api/v2/pokemon/?offset=1&limit=500"),
+        headers: {"Content-Type": "application/json"},
       );
       if (response.statusCode == AppDimes().size200) {
-        final jsonDecoded = json.decode(response.body);
+        final jsonDecoded = json.decode(response.body) as Map<String, dynamic>;
         final responseData = jsonDecoded["results"] as List;
         final data = responseData
             .map(
@@ -44,8 +43,8 @@ class PokeMonServices implements PokemonService {
       return Error(TheFailure(AppStrings.invalidFormat));
     } on SocketException {
       return Error(TheFailure(AppStrings.noInternetConnection));
-    } catch (err) {
-      return Error(TheFailure(err.toString()));
+    } catch (error) {
+      return Error(TheFailure(error.toString()));
     }
   }
 
@@ -54,7 +53,7 @@ class PokeMonServices implements PokemonService {
     try {
       final response = await http.get(
         Uri.parse(url),
-        headers: {'Content-Type': 'application/json'},
+        headers: {"Content-Type": "application/json"},
       );
       if (response.statusCode == AppDimes().size200) {
         final jsonDecoded = json.decode(response.body);
@@ -70,8 +69,8 @@ class PokeMonServices implements PokemonService {
       return Error(TheFailure(AppStrings.invalidFormat));
     } on SocketException {
       return Error(TheFailure(AppStrings.noInternetConnection));
-    } catch (err) {
-      return Error(TheFailure(err.toString()));
+    } catch (error) {
+      return Error(TheFailure(error.toString()));
     }
   }
 

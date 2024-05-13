@@ -1,13 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-import 'package:phundit_app/commons/app_dimes.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:flutter/material.dart";
+import "package:phundit_app/commons/app_dimes.dart";
 
 class AboutWidget extends StatelessWidget {
-  const AboutWidget({
-    this.header,
-    this.height,
-    super.key,
-  });
+  const AboutWidget({this.header, this.height, super.key});
   final double? height;
   final String? header;
   @override
@@ -18,7 +14,7 @@ class AboutWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         AutoSizeText(
-          header?.toString() ?? '',
+          header?.toString() ?? "",
           style: theme.bodyLarge?.copyWith(fontSize: AppDimes().kFontSize16),
         ),
         SizedBox(width: AppDimes().size50),
