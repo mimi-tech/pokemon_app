@@ -36,16 +36,14 @@ class Bootstrap extends BlocObserver {
   }
 }
 
-class AppStarter {
-  Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
-    FlutterError.onError = ErrorHandler.handleFlutterError;
+Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+  FlutterError.onError = ErrorHandler.handleFlutterError;
 
-    Bloc.observer = const Bootstrap();
+  Bloc.observer = const Bootstrap();
 
-    WidgetsFlutterBinding.ensureInitialized();
-    HydratedBloc.storage = await HydratedStorage.build(
-      storageDirectory: await getApplicationDocumentsDirectory(),
-    );
-    return runApp(await builder());
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+  return runApp(await builder());
 }

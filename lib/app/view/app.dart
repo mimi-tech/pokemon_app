@@ -1,3 +1,4 @@
+
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart";
@@ -20,9 +21,6 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final _appRouter = AppRouter();
-
-  final _dataBloc = PokemonBloc(const PokeMonServices())..add(LoadData());
-
   final _repository = const PokeMonServices();
   @override
   void dispose() {
@@ -37,7 +35,11 @@ class _AppState extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ThemeCubit(AppColors.kPinkColor)),
-        BlocProvider<PokemonBloc>.value(value: _dataBloc),
+        // Moved BlocProviders here.
+        BlocProvider<PokemonBloc>(
+          create: (context) =>
+              PokemonBloc(const PokeMonServices())..add(LoadData()),
+        ),
         BlocProvider<PokemonDetailsBloc>.value(
           value: PokemonDetailsBloc(_repository),
         ),
@@ -59,43 +61,3 @@ class _AppState extends State<App> {
     );
   }
 }
-
-/*class App extends StatelessWidget {
-  App({super.key});
-
-  ThemeData theme = MyTheme.lightTheme(kPinkColor);
-
-  @override
-  Widget build(BuildContext context) {
-    AppRouter appRouter = AppRouter();
-    print("kkkkkkkkk");
-    //BlocProvider(create: (context) => ThemeCubit(kPinkColor));
-    return MultiBlocProvider(
-        providers: [
-        BlocProvider(create: (context) => ThemeCubit(kPinkColor)),
-      BlocProvider<DataBloc>(create: (context) => DataBloc(PokeMonServices())
-        ..add(LoadData()),),
-          ],
-      child: MaterialApp.router(
-        routerConfig: appRouter.config(),
-        theme: theme,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-
-        builder: (context, child) {
-          return  BlocListener<ThemeCubit, ThemeState>(
-                listener: (context, state) async {
-                  if (state is CurrentThemeState) {
-                    theme = MyTheme.lightTheme(state.primaryColor);
-                  }
-                },
-              child:child,
-              );
-
-            },),);
-
-
-  }
-}
-
-*/
