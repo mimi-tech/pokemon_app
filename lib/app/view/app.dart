@@ -1,4 +1,3 @@
-
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart";
