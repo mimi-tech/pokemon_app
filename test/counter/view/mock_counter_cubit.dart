@@ -11,6 +11,7 @@ import "package:phundit_app/counter/view/counter_view.dart";
 import "package:phundit_app/l10n/l10n.dart";
 
 class _MockCounterCubit extends MockCubit<int> implements CounterCubit {}
+
 extension _PumpApp on WidgetTester {
   Future<void> pumpApp(Widget widget) {
     return pumpWidget(
@@ -22,6 +23,7 @@ extension _PumpApp on WidgetTester {
     );
   }
 }
+
 void main() {
   const counterPage = "CounterPage";
   const counterView = "CounterView";
@@ -29,8 +31,6 @@ void main() {
   const rendersCurrentCount = "renders current count";
   const callsIncrement = "calls increment when increment button is tapped";
   const callsDecrement = "calls decrement when decrement button is tapped";
-
-
 
   group(counterPage, () {
     testWidgets(rendersCounterView, (tester) async {
