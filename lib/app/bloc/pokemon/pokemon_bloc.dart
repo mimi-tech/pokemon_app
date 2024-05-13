@@ -1,45 +1,33 @@
-// data_bloc.dart
-import 'package:bloc/bloc.dart';
-import 'package:multiple_result/multiple_result.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_event.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_state.dart';
+import "package:hydrated_bloc/hydrated_bloc.dart";
+import "package:phundit_app/app/bloc/pokemon/pokemon_event.dart";
+import "package:phundit_app/app/bloc/pokemon/pokemon_state.dart";
+import "package:phundit_app/model/pokemonnModel/pokemon_model.dart";
+import "package:phundit_app/services/pokemon_service.dart";
 
-import 'package:phundit_app/model/pokemonnModel/pokemonModel.dart';
-import 'package:phundit_app/services/feedback.dart';
-import 'package:phundit_app/services/pokemon_service.dart';
-
-
-class DataBloc extends HydratedBloc<DataEvent, DataState> {
-
-  DataBloc(this.repository) : super( DataInitial()) {
+class PokemonBloc extends HydratedBloc<PokemonEvent, PokemonState> {
+  PokemonBloc(this.repository) : super(DataInitial()) {
     on<LoadData>((event, emit) async {
-      emit( DataLoading());
+      emit(DataLoading());
       final result = await repository.fetchPokemon();
       result.when(
-            (success) {
-
-              final responseData = success["results"] as List;
-              final data = responseData.map((json) =>
-                PokemonModel.fromJson(json as Map<String, dynamic>),).toList();
-
-              emit(DataSuccess(data));
+        (success) {
+          emit(DataSuccess(success));
         },
-            (error) {
-
-              emit(DataError(error));
+        (error) {
+          emit(DataError(error.toString()));
         },
       );
     });
   }
-  final PokeMonServices repository;
+  final PokemonService repository;
 
   @override
-  DataState? fromJson(Map<String, dynamic> json) {
+  PokemonState? fromJson(Map<String, dynamic> json) {
     try {
-      final pokemonList = (json['pokemonList'] as List)
-          .map((item) => PokemonModel.fromJson(item as Map<String, String>))
+      final pokemonList = (json["pokemonList"] as List)
+          .map((item) => PokemonModel.fromJson(item as Map<String, Object>))
           .toList();
+
       return DataSuccess(pokemonList);
     } catch (_) {
       return null;
@@ -47,16 +35,9 @@ class DataBloc extends HydratedBloc<DataEvent, DataState> {
   }
 
   @override
-  Map<String, dynamic>? toJson(DataState state) {
-    if (state is DataSuccess) {
-      return {'pokemonList': state.data.map((e) => e.toJson()).toList()};
-    }
-    return null;
+  Map<String, dynamic>? toJson(PokemonState state) {
+    return state is DataSuccess
+        ? {"pokemonList": state.data.map((e) => e.toJson()).toList()}
+        : null;
   }
-
-  // @override
-  // DataState fromJson(Map<String, dynamic> json) => DataState.fromJson(json);
-  //
-  // @override
-  // Map<String, dynamic> toJson(DataState state) => state.toJson();
 }

@@ -1,10 +1,9 @@
-import 'package:equatable/equatable.dart';
+import "package:equatable/equatable.dart";
 
-abstract class DataEvent extends Equatable {
-  const DataEvent();
-
+abstract class PokemonEvent extends Equatable {
+  const PokemonEvent();
   @override
   List<Object?> get props => [];
 }
 
-class LoadData extends DataEvent {}
+class LoadData extends PokemonEvent {}

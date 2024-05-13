@@ -1,94 +1,101 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/enum.dart';
-import 'package:phundit_app/commons/color.dart';
-import 'package:phundit_app/commons/dimes.dart';
-import 'package:phundit_app/l10n/l10n.dart';
-class PokemonAbout extends StatelessWidget {
-  const PokemonAbout({super.key});
+import "package:auto_size_text/auto_size_text.dart";
+import "package:flutter/material.dart";
+import "package:phundit_app/app/view/viewAll/sideModel/pokemon_details.dart";
+import "package:phundit_app/app/view/viewAll/widgets/about_widget.dart";
+import "package:phundit_app/commons/app_colors.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/commons/app_strings.dart";
+import "package:phundit_app/l10n/l10n.dart";
+
+class AboutPokemon extends PokemonDetails {
+  const AboutPokemon({
+    required super.fetchedPokemon,
+    required super.selectedPokemon,
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildDetails(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     final l10n = context.l10n;
-    return  Column(
+    final abilities = selectedPokemon.abilities;
+
+    return Column(
       children: [
-        const Divider(color: kGrayColor,),
-        AutoSizeText(l10n.about,style: theme.titleMedium,),
-        const SizedBox(height: 20,),
-
+        const Divider(color: AppColors.kGrayColor),
+        AutoSizeText(l10n.about, style: theme.titleMedium),
+        SizedBox(height: AppDimes().size20),
         Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/rectangle.png'),
-                fit: BoxFit.cover,),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(AppStrings.rectangleImage),
+              fit: BoxFit.cover,
             ),
-
+          ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(AppDimes().size8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AboutWidget(height: selectedPokemon!.height!.toDouble(),header: l10n.height,),
+                AboutWidget(
+                  header: l10n.height,
+                  height: selectedPokemon.height?.toDouble(),
+                ),
                 const Divider(),
-                AboutWidget(height: selectedPokemon!.weight!.toDouble(),header: l10n.weight,),
+                AboutWidget(
+                  header: l10n.weight,
+                  height: selectedPokemon.weight?.toDouble(),
+                ),
                 const Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    AutoSizeText(l10n.abilities,style: theme.bodyLarge!.copyWith(fontSize: kFontSize16),),
-                    const SizedBox(width: 50,),
-
+                    AutoSizeText(
+                      l10n.abilities,
+                      style: theme.bodyLarge
+                          ?.copyWith(fontSize: AppDimes().kFontSize16),
+                    ),
+                    SizedBox(width: AppDimes().size50),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        for(int i = 0; i < selectedPokemon!.abilities!.length; i++)
+                        for (int nums = 0;
+                            abilities != null && nums < abilities.length;
+                            nums += 1)
                           Row(
                             children: [
-                              const Icon(Icons.circle_rounded,size: 8,color: kBlackColor,),
-                              const SizedBox(width:5),
-                              AutoSizeText(selectedPokemon!.abilities![i].ability!.name.toString(),
-                                style: theme.bodyLarge!
-                                    .copyWith(fontWeight: FontWeight.w600),),
+                              Icon(
+                                Icons.circle_rounded,
+                                size: AppDimes().size8,
+                                color: AppColors.kBlackColor,
+                              ),
+                              SizedBox(width: AppDimes().size5),
+                              AutoSizeText(
+                                abilities
+                                        .elementAtOrNull(nums)
+                                        ?.ability
+                                        ?.name
+                                        ?.toString() ??
+                                    "",
+                                style: theme.bodyLarge
+                                    ?.copyWith(fontWeight: FontWeight.w600),
+                              ),
                             ],
-                          )
-
+                          ),
                       ],
-                    )
+                    ),
                   ],
-                )
-
-
-
+                ),
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
-}
 
-
-class AboutWidget extends StatelessWidget {
-  const AboutWidget({super.key, this.height, this.header});
-  final double? height;
-  final String? header;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
-    final l10n = context.l10n;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        AutoSizeText(header!,style: theme.bodyLarge!.copyWith(fontSize: kFontSize16),),
-        const SizedBox(width: 50,),
-        AutoSizeText(height!.toString(),
-          style: theme.bodyLarge!.copyWith(fontWeight: FontWeight.w600),),
-      ],
-    );
+    return buildDetails(context);
   }
 }
-

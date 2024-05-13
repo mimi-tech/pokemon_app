@@ -1,79 +1,85 @@
-import 'dart:convert';
-import 'dart:io';
+import "dart:convert";
+import "dart:io";
 
-import 'package:multiple_result/multiple_result.dart';
+import "package:http/http.dart" as http;
+import "package:multiple_result/multiple_result.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/commons/app_strings.dart";
+import "package:phundit_app/model/pokemon/pokemon.dart";
+import "package:phundit_app/model/pokemonnModel/pokemon_model.dart";
+import "package:phundit_app/services/feedback.dart";
 
-import 'package:http/http.dart' as http;
-import 'package:phundit_app/services/feedback.dart';
+abstract class PokemonService {
+  Future<Result<List<PokemonModel>, TheFailure>> fetchPokemon();
+  Future<Result<Pokemon, TheFailure>> fetchPokemonDetails(String url);
+  Future<String> fetchSvgString(String svgUrl);
+}
 
-class PokeMonServices{
+class PokeMonServices implements PokemonService {
+  const PokeMonServices();
+  @override
+  Future<Result<List<PokemonModel>, TheFailure>> fetchPokemon() async {
+    try {
+      final response = await http.get(
+        Uri.parse("https://pokeapi.co/api/v2/pokemon/?offset=1&limit=500"),
+        headers: {"Content-Type": "application/json"},
+      );
+      if (response.statusCode == AppDimes().size200) {
+        final jsonDecoded = json.decode(response.body) as Map<String, dynamic>;
+        final responseData = jsonDecoded["results"] as List;
+        final data = responseData
+            .map(
+              (json) => PokemonModel.fromJson(json as Map<String, dynamic>),
+            )
+            .toList();
 
-
-
-    Future<Result<dynamic,TheFailure>> fetchPokemon() async {
-      try {
-        final  response = await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/?offset=1&limit=500'),
-            headers: {'Content-Type': 'application/json'},
-        );
-        if (response.statusCode == 200) {
-
-          final jsonDecoded = json.decode(response.body);
-        //final result = PokemonModel.fromJson(jsonDecoded as Map<String, String>);
-
-          return Success(jsonDecoded);
-        }else{
-          return Error(TheFailure(response.body));
-        }
-      }on HttpException {
-        return Error(TheFailure('Internal server error'));
-      } on FormatException {
-        return Error(TheFailure('Invalid format'));
-      } on SocketException {
-        return Error(TheFailure('No internet connection'));
-      }catch (e) {
-        return Error(TheFailure(e));
+        return Success(data);
       }
-    }
 
-    Future<Result<dynamic, TheFailure>> fetchPokemonDetails(String url) async {
-
-      try {
-
-        final  response = await http.get(Uri.parse(url),
-          headers: {'Content-Type': 'application/json'},
-        );
-        if (response.statusCode == 200) {
-
-          final jsonDecoded = json.decode(response.body);
-          //final result = PokemonModel.fromJson(jsonDecoded as Map<String, String>);
-
-          return Success(jsonDecoded);
-        }else{
-          return Error(TheFailure(response.body));
-        }
-      }on HttpException {
-        return Error(TheFailure('Internal server error'));
-      } on FormatException {
-        return Error(TheFailure('Invalid format'));
-      } on SocketException {
-        return Error(TheFailure('No internet connection'));
-      }catch (e) {
-
-        return Error(TheFailure(e));
-      }
-    }
-
-    Future<String> fetchSvgString(String svgUrl) async {
-      final response = await http.get(Uri.parse(svgUrl));
-      if (response.statusCode == 200) {
-        return response.body;
-      } else {
-        // Handle error (e.g., throw exception or return null)
-        throw Exception('Failed to load SVG from URL');
-      }
+      return Error(TheFailure(response.body));
+    } on HttpException {
+      return Error(TheFailure(AppStrings.internalServerError));
+    } on FormatException {
+      return Error(TheFailure(AppStrings.invalidFormat));
+    } on SocketException {
+      return Error(TheFailure(AppStrings.noInternetConnection));
+    } catch (error) {
+      return Error(TheFailure(error.toString()));
     }
   }
 
+  @override
+  Future<Result<Pokemon, TheFailure>> fetchPokemonDetails(String url) async {
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+      );
+      if (response.statusCode == AppDimes().size200) {
+        final jsonDecoded = json.decode(response.body);
+        final data = Pokemon.fromJson(jsonDecoded as Map<String, dynamic>);
 
+        return Success(data);
+      }
 
+      return Error(TheFailure(response.body));
+    } on HttpException {
+      return Error(TheFailure(AppStrings.internalServerError));
+    } on FormatException {
+      return Error(TheFailure(AppStrings.invalidFormat));
+    } on SocketException {
+      return Error(TheFailure(AppStrings.noInternetConnection));
+    } catch (error) {
+      return Error(TheFailure(error.toString()));
+    }
+  }
 
+  @override
+  Future<String> fetchSvgString(String svgUrl) async {
+    final response = await http.get(Uri.parse(svgUrl));
+    if (response.statusCode == AppDimes().size200) {
+      return response.body;
+    }
+    throw Exception(AppStrings.failedToLoadSVG);
+  }
+}

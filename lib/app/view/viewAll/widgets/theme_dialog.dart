@@ -1,102 +1,108 @@
+import "dart:async";
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phundit_app/app/view/viewAll/widgets/color_picker.dart';
-import 'package:phundit_app/commons/color.dart';
-import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/theme/theme_cubit.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:phundit_app/app/view/viewAll/widgets/color_picker.dart";
+import "package:phundit_app/commons/app_colors.dart";
+import "package:phundit_app/commons/app_dimes.dart";
+import "package:phundit_app/commons/app_strings.dart";
+import "package:phundit_app/l10n/l10n.dart";
+import "package:phundit_app/theme/theme_cubit.dart";
 
-Color selectedColor = kPinkColor;
-void showMyDialog(BuildContext context) {
-  final theme = Theme.of(context).textTheme;
-  final l10n = context.l10n;
-  final themeColor = <Color>[kPinkColor,Colors.cyan,Colors.orange];
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
+class ThemeDialog {
+  Color selectedColor = AppColors.kPinkColor;
+  void showMyDialog(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+    final l10n = context.l10n;
+    final themeColor = [AppColors.kPinkColor, Colors.cyan, Colors.orange];
 
-      return AlertDialog(
-       titlePadding: EdgeInsets.zero,
-       contentPadding: EdgeInsets.zero,
-        content: StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
-
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.25,
-
-          child: Column(
-              children: [
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/noise_background.png'),
-                        fit: BoxFit.cover,
-
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(l10n.chooseTheme,
-                        style: theme.bodyMedium!.copyWith(fontWeight: FontWeight.w600),),
-                    ),
-                  ),
-
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  decoration:   const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(30),
-                      bottomLeft: Radius.circular(30),
-                    ),
-
-
-                    image: DecorationImage(
-                      image: AssetImage('assets/noise_background.png'),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(kLightGrayColor, BlendMode.darken),
-                    ),
-                  ),
+    unawaited(
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            titlePadding: EdgeInsets.zero,
+            content: StatefulBuilder(
+              builder: (BuildContext ctx, StateSetter setState) {
+                return SizedBox(
+                  height:
+                      MediaQuery.sizeOf(context).height * AppDimes().size025,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(AppStrings.backgroundImage),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        width: MediaQuery.sizeOf(context).width,
+                        height: MediaQuery.sizeOf(context).height *
+                            AppDimes().size005,
+                        child: Center(
+                          child: Text(
+                            l10n.chooseTheme,
+                            style: theme.bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage(AppStrings.backgroundImage),
+                            colorFilter: ColorFilter.mode(
+                              AppColors.kLightGrayColor,
+                              BlendMode.darken,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(AppDimes().size30),
+                            bottomRight: Radius.circular(AppDimes().size30),
+                          ),
+                        ),
+                        width: MediaQuery.sizeOf(context).width,
+                        height: MediaQuery.sizeOf(context).height *
+                            AppDimes().size02,
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              for (int nums = 0;
+                                  nums < themeColor.length;
+                                  nums += 1)
+                                ColorPicker(
+                                  containerSize: AppDimes().size55,
+                                  onPressed: () {
+                                    selectedColor =
+                                        themeColor.elementAtOrNull(nums) ??
+                                            Colors.pink;
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          for(int i = 0; i < themeColor.length; i++)
-                          ColorPicker(onPressed: (){
-
-                            selectedColor = themeColor[i];
-
-                            context.read<ThemeCubit>().changeThemeColor(selectedColor);
-                            //Navigator.of(context).pop();
-                            },
-                            borderColor: selectedColor == themeColor[i]
-                                ?kBlackColor
-                                :Colors.transparent,
-                            color: themeColor[i],containerSize: 55,
-                            secondContainerSize: 45,),
-
-
-                        ],
+                                    context
+                                        .read<ThemeCubit>()
+                                        .changeThemeColor(selectedColor);
+                                  },
+                                  secondContainerSize: AppDimes().size45,
+                                  borderColor: selectedColor ==
+                                          themeColor.elementAtOrNull(nums)
+                                      ? AppColors.kBlackColor
+                                      : Colors.transparent,
+                                  color: themeColor.elementAtOrNull(nums),
+                                ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                );
+              },
             ),
+            contentPadding: EdgeInsets.zero,
           );
-        }),
-          //SizedBox(height: 20,),
-
-          
-      
-
-      );
-    },
-  );
+        },
+      ),
+    );
+  }
 }
-
