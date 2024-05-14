@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-correct-handler-name
+
 import "dart:async";
 
 import "package:auto_route/auto_route.dart";
