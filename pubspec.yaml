@@ -1,0 +1,87 @@
+name: phundit_app
+description: A Very Good Project created by Very Good CLI.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: "^3.3.0"
+
+dependencies:
+  bloc: ^8.1.3
+  freezed_annotation: ^2.4.1
+  auto_route: ^7.9.2
+  auto_size_text: ^3.0.0
+  hydrated_bloc: ^9.1.4
+  fast_immutable_collections: ^10.1.2
+  multiple_result: ^5.1.0
+  google_fonts: ^5.1.0
+  flutter_svg: ^2.0.7
+  http: ^1.1.0
+  sentry_flutter: ^7.18.0
+  equatable: ^2.0.5
+  path_provider: ^2.1.2
+  number_paginator: ^0.4.1
+  json_annotation: ^4.8.1
+  xml: ^6.5.0
+  collection: ^1.18.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.4
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
+
+
+dev_dependencies:
+  bloc_test: ^9.1.6
+  build_runner: ^2.4.8
+  flutter_gen_runner:
+  auto_route_generator: ^7.3.2
+  freezed: ^2.4.7
+  json_serializable: ^6.7.1
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.3
+  very_good_analysis: ^5.1.0
+  flutter_native_splash: ^2.2.19
+flutter_native_splash:
+ color: "#ffffff"
+ image: assets/logo.png
+
+
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/
+
+  fonts:
+    - family: Clash Display
+      fonts:
+        - asset: assets/fonts/clashDisplay/ClashDisplay-Regular.ttf
+        - asset: assets/fonts/clashDisplay/ClashDisplay-Medium.ttf
+        - asset: assets/fonts/clashDisplay/ClashDisplay-Bold.ttf
+        - asset: assets/fonts/clashDisplay/ClashDisplay-Semibold.ttf
+        - asset: assets/fonts/clashDisplay/ClashDisplay-Light.ttf
+        - asset: assets/fonts/clashDisplay/ClashDisplay-Extralight.ttf
+    - family: General Sans
+      fonts:
+        - asset: assets/fonts/generalSans/GeneralSans-Regular.ttf
+        - asset: assets/fonts/generalSans/GeneralSans-Medium.ttf
+        - asset: assets/fonts/generalSans/GeneralSans-Bold.ttf
+        - asset: assets/fonts/generalSans/GeneralSans-Extralight.ttf
+        - asset: assets/fonts/generalSans/GeneralSans-Light.ttf
+        - asset: assets/fonts/generalSans/GeneralSans-Semibold.ttf
+
+    - family: Sofia Sans
+      fonts:
+        - asset: assets/fonts/sofiaSans/SofiaSans-Regular.ttf
+        - asset: assets/fonts/sofiaSans/SofiaSans-Medium.ttf
+        - asset: assets/fonts/sofiaSans/SofiaSans-Bold.ttf
+        - asset: assets/fonts/sofiaSans/SofiaSans-Light.ttf
+        - asset: assets/fonts/sofiaSans/SofiaSans-Semibold.ttf
+        - asset: assets/fonts/sofiaSans/SofiaSans-ExtraBold.ttf
+
+
