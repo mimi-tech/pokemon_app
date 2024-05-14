@@ -12,6 +12,7 @@ on:
     branches:
       - master
 
+
 jobs:
   semantic-pull-request:
     if: github.actor != 'dependabot[bot]'
