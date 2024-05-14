@@ -5,9 +5,9 @@ import "package:phundit_app/model/pokemonnModel/pokemon_model.dart";
 import "package:phundit_app/services/pokemon_service.dart";
 
 class PokemonBloc extends HydratedBloc<PokemonEvent, PokemonState> {
-  PokemonBloc(this.repository) : super(DataInitial()) {
+  PokemonBloc(this.repository) : super(const DataInitial()) {
     on<LoadData>((event, emit) async {
-      emit(DataLoading());
+      emit(const DataLoading());
       final result = await repository.fetchPokemon();
       result.when(
         (success) {

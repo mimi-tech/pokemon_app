@@ -9,7 +9,7 @@ class PokemonTypeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
-    final textTitle = "${EnumsHolder().getTypeString(title)} $title";
+    final textTitle = "${const EnumsHolder().getTypeString(title)} $title";
 
     return Material(
       color: AppColors.kDividerColor,

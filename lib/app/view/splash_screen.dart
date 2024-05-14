@@ -71,10 +71,7 @@ class SplashScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [SvgPicture.asset(Assets.logo1)],
-            ),
+            Center(child: SvgPicture.asset(Assets.logo1)),
           ],
         ),
       ),

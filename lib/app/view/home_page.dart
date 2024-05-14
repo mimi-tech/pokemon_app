@@ -1,3 +1,5 @@
+import "dart:async";
+
 import "package:auto_route/auto_route.dart";
 import "package:auto_size_text/auto_size_text.dart";
 import "package:flutter/material.dart";
@@ -110,7 +112,8 @@ class HomePage extends StatelessWidget {
                     ),
                     SizedBox(height: AppDimes().size10),
                     GestureDetector(
-                      onTap: () => context.router.push(const ViewAllRoute()),
+                      onTap: () =>
+                          unawaited(context.router.push(const ViewAllRoute())),
                       child: AutoSizeText(
                         l10n.viewAll,
                         style: theme.bodyMedium?.copyWith(

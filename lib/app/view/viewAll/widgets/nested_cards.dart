@@ -67,25 +67,6 @@ class NestedCards extends StatelessWidget {
                                 EnumsHolder.selectedPokemon = pokemonData;
                                 Scaffold.of(context).openDrawer();
                               },
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Theme.of(context).primaryColor,
-                                ),
-                                padding: MaterialStateProperty.all<
-                                    EdgeInsetsGeometry>(
-                                  EdgeInsets.symmetric(
-                                    vertical: AppDimes().size12,
-                                    horizontal: AppDimes().size30,
-                                  ),
-                                ),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                      AppDimes().size15,
-                                    ),
-                                  ),
-                                ),
-                              ),
                               child: AutoSizeText(
                                 AppStrings.views,
                                 style: theme.bodyMedium?.copyWith(

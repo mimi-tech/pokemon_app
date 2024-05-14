@@ -1,4 +1,4 @@
-// ignore_for_file: avoid-global-state, avoid-non-ascii-symbols
+// ignore_for_file: avoid-global-state, avoid-non-ascii-symbols, no-equal-switch-case
 /*
 avoid-global-state: This warning is triggered because you're using
 static variables (fetchedPokemon and selectedPokemon) to store global state within the class:
@@ -13,6 +13,8 @@ Non-ASCII Symbols: I will need the symbols to come as a image. But I don't think
 import "package:phundit_app/model/pokemon/pokemon.dart";
 
 class EnumsHolder {
+  const EnumsHolder();
+
   static List<Pokemon> fetchedPokemon = [];
   static Pokemon selectedPokemon = Pokemon();
   static const fire = "fire";

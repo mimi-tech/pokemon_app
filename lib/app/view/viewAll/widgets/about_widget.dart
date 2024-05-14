@@ -1,5 +1,6 @@
 import "package:auto_size_text/auto_size_text.dart";
 import "package:flutter/material.dart";
+import "package:intl/intl.dart";
 import "package:phundit_app/commons/app_dimes.dart";
 
 class AboutWidget extends StatelessWidget {
@@ -19,7 +20,7 @@ class AboutWidget extends StatelessWidget {
         ),
         SizedBox(width: AppDimes().size50),
         AutoSizeText(
-          height.toString(),
+          NumberFormat().format(height),
           style: theme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
         ),
       ],

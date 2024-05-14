@@ -37,7 +37,7 @@ class _AppState extends State<App> {
         // Moved BlocProviders here.
         BlocProvider<PokemonBloc>(
           create: (context) =>
-              PokemonBloc(const PokeMonServices())..add(LoadData()),
+              PokemonBloc(const PokeMonServices())..add(const LoadData()),
         ),
         BlocProvider<PokemonDetailsBloc>.value(
           value: PokemonDetailsBloc(_repository),

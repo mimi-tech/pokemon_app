@@ -6,4 +6,6 @@ abstract class PokemonEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class LoadData extends PokemonEvent {}
+class LoadData extends PokemonEvent {
+  const LoadData();
+}

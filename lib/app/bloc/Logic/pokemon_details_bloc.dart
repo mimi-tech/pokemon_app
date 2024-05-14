@@ -1,4 +1,4 @@
-// ignore_for_file: omit_local_variable_types
+// ignore_for_file: omit_local_variable_types, avoid-collection-mutating-methods
 
 /*
  When I added an int as an annotation. I was still getting the error
@@ -46,7 +46,7 @@ class PokemonDetailsBloc
 }
 
 class CardBloc extends Bloc<CardEvent, CardState> {
-  CardBloc() : super(CardInitial()) {
+  CardBloc() : super(const CardInitial()) {
     on<CardTapped>((event, emit) async {
       emit(CardShowingButton(event.index));
     });

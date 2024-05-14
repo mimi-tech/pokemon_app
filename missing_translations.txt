@@ -1,0 +1,23 @@
+{
+  "es": [
+    "poke",
+    "book",
+    "largestPokemon",
+    "enterPokemonName",
+    "viewAll",
+    "loading",
+    "somethingWentWrong",
+    "about",
+    "stats",
+    "height",
+    "weight",
+    "abilities",
+    "attack",
+    "defense",
+    "specialAttack",
+    "specialDefence",
+    "speed",
+    "similar",
+    "chooseTheme"
+  ]
+}

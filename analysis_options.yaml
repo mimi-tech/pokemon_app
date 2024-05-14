@@ -132,11 +132,14 @@ dart_code_metrics:
           - top
           - vertical
           - horizontal
+          - bottomLeft
+          - bottomRight
     - prefer-moving-to-variable:
         allowed-duplicated-chains: 5
     - avoid-similar-names:
         show-similarity: true
         similarity-threshold: 0.9
+    
 
   formatter:
     indent: 0

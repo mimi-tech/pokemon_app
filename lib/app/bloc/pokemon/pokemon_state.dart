@@ -7,9 +7,13 @@ abstract class PokemonState extends Equatable {
   List<Object?> get props => [];
 }
 
-class DataInitial extends PokemonState {}
+class DataInitial extends PokemonState {
+  const DataInitial();
+}
 
-class DataLoading extends PokemonState {}
+class DataLoading extends PokemonState {
+  const DataLoading();
+}
 
 class DataSuccess extends PokemonState {
   const DataSuccess(this.data);

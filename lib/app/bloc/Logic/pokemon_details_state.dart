@@ -69,7 +69,9 @@ abstract class CardState extends Equatable {
   List<Object> get props => [];
 }
 
-class CardInitial extends CardState {}
+class CardInitial extends CardState {
+  const CardInitial();
+}
 
 class CardShowingButton extends CardState {
   const CardShowingButton(this.selectedIndex);

@@ -46,18 +46,18 @@ Map<String, dynamic> _$$PokemonImplToJson(_$PokemonImpl instance) =>
 
 _$AbilityImpl _$$AbilityImplFromJson(Map<String, dynamic> json) =>
     _$AbilityImpl(
+      slot: json['slot'] as int,
       ability: json['ability'] == null
           ? null
           : NamedAPIResource.fromJson(json['ability'] as Map<String, dynamic>),
       isHidden: json['isHidden'] as bool?,
-      slot: json['slot'] as int,
     );
 
 Map<String, dynamic> _$$AbilityImplToJson(_$AbilityImpl instance) =>
     <String, dynamic>{
+      'slot': instance.slot,
       'ability': instance.ability,
       'isHidden': instance.isHidden,
-      'slot': instance.slot,
     };
 
 _$NamedAPIResourceImpl _$$NamedAPIResourceImplFromJson(

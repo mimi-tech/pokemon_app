@@ -413,9 +413,9 @@ Ability _$AbilityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Ability {
+  int get slot => throw _privateConstructorUsedError;
   NamedAPIResource? get ability => throw _privateConstructorUsedError;
   bool? get isHidden => throw _privateConstructorUsedError;
-  int get slot => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -427,7 +427,7 @@ abstract class $AbilityCopyWith<$Res> {
   factory $AbilityCopyWith(Ability value, $Res Function(Ability) then) =
       _$AbilityCopyWithImpl<$Res, Ability>;
   @useResult
-  $Res call({NamedAPIResource? ability, bool? isHidden, int slot});
+  $Res call({int slot, NamedAPIResource? ability, bool? isHidden});
 
   $NamedAPIResourceCopyWith<$Res>? get ability;
 }
@@ -445,11 +445,15 @@ class _$AbilityCopyWithImpl<$Res, $Val extends Ability>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? slot = null,
     Object? ability = freezed,
     Object? isHidden = freezed,
-    Object? slot = null,
   }) {
     return _then(_value.copyWith(
+      slot: null == slot
+          ? _value.slot
+          : slot // ignore: cast_nullable_to_non_nullable
+              as int,
       ability: freezed == ability
           ? _value.ability
           : ability // ignore: cast_nullable_to_non_nullable
@@ -458,10 +462,6 @@ class _$AbilityCopyWithImpl<$Res, $Val extends Ability>
           ? _value.isHidden
           : isHidden // ignore: cast_nullable_to_non_nullable
               as bool?,
-      slot: null == slot
-          ? _value.slot
-          : slot // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 
@@ -485,7 +485,7 @@ abstract class _$$AbilityImplCopyWith<$Res> implements $AbilityCopyWith<$Res> {
       __$$AbilityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({NamedAPIResource? ability, bool? isHidden, int slot});
+  $Res call({int slot, NamedAPIResource? ability, bool? isHidden});
 
   @override
   $NamedAPIResourceCopyWith<$Res>? get ability;
@@ -502,11 +502,15 @@ class __$$AbilityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? slot = null,
     Object? ability = freezed,
     Object? isHidden = freezed,
-    Object? slot = null,
   }) {
     return _then(_$AbilityImpl(
+      slot: null == slot
+          ? _value.slot
+          : slot // ignore: cast_nullable_to_non_nullable
+              as int,
       ability: freezed == ability
           ? _value.ability
           : ability // ignore: cast_nullable_to_non_nullable
@@ -515,10 +519,6 @@ class __$$AbilityImplCopyWithImpl<$Res>
           ? _value.isHidden
           : isHidden // ignore: cast_nullable_to_non_nullable
               as bool?,
-      slot: null == slot
-          ? _value.slot
-          : slot // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -526,21 +526,21 @@ class __$$AbilityImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AbilityImpl extends _Ability with DiagnosticableTreeMixin {
-  _$AbilityImpl({this.ability, this.isHidden, required this.slot}) : super._();
+  _$AbilityImpl({required this.slot, this.ability, this.isHidden}) : super._();
 
   factory _$AbilityImpl.fromJson(Map<String, dynamic> json) =>
       _$$AbilityImplFromJson(json);
 
   @override
+  final int slot;
+  @override
   final NamedAPIResource? ability;
   @override
   final bool? isHidden;
-  @override
-  final int slot;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Ability(ability: $ability, isHidden: $isHidden, slot: $slot)';
+    return 'Ability(slot: $slot, ability: $ability, isHidden: $isHidden)';
   }
 
   @override
@@ -548,9 +548,9 @@ class _$AbilityImpl extends _Ability with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Ability'))
+      ..add(DiagnosticsProperty('slot', slot))
       ..add(DiagnosticsProperty('ability', ability))
-      ..add(DiagnosticsProperty('isHidden', isHidden))
-      ..add(DiagnosticsProperty('slot', slot));
+      ..add(DiagnosticsProperty('isHidden', isHidden));
   }
 
   @override
@@ -558,15 +558,15 @@ class _$AbilityImpl extends _Ability with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AbilityImpl &&
+            (identical(other.slot, slot) || other.slot == slot) &&
             (identical(other.ability, ability) || other.ability == ability) &&
             (identical(other.isHidden, isHidden) ||
-                other.isHidden == isHidden) &&
-            (identical(other.slot, slot) || other.slot == slot));
+                other.isHidden == isHidden));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, ability, isHidden, slot);
+  int get hashCode => Object.hash(runtimeType, slot, ability, isHidden);
 
   @JsonKey(ignore: true)
   @override
@@ -584,19 +584,19 @@ class _$AbilityImpl extends _Ability with DiagnosticableTreeMixin {
 
 abstract class _Ability extends Ability {
   factory _Ability(
-      {final NamedAPIResource? ability,
-      final bool? isHidden,
-      required final int slot}) = _$AbilityImpl;
+      {required final int slot,
+      final NamedAPIResource? ability,
+      final bool? isHidden}) = _$AbilityImpl;
   _Ability._() : super._();
 
   factory _Ability.fromJson(Map<String, dynamic> json) = _$AbilityImpl.fromJson;
 
   @override
+  int get slot;
+  @override
   NamedAPIResource? get ability;
   @override
   bool? get isHidden;
-  @override
-  int get slot;
   @override
   @JsonKey(ignore: true)
   _$$AbilityImplCopyWith<_$AbilityImpl> get copyWith =>

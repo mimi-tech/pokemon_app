@@ -1,3 +1,5 @@
+// ignore_for_file: no-equal-arguments
+
 import "dart:async";
 
 import "package:flutter/material.dart";

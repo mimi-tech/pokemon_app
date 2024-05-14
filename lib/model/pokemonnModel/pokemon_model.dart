@@ -1,8 +1,8 @@
 import "package:flutter/foundation.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
-part "pokemonModel.freezed.dart";
-part "pokemonModel.g.dart";
+part "pokemon_model.freezed.dart";
+part "pokemon_model.g.dart";
 
 @Freezed()
 class PokemonModel with _$PokemonModel {
