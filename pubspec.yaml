@@ -35,7 +35,8 @@ dependencies:
 dev_dependencies:
   bloc_test: ^9.1.6
   build_runner: ^2.4.8
-  flutter_gen_runner:
+  dart_code_metrics_presets: ^2.11.0
+  flutter_gen_runner: ^5.4.0
   auto_route_generator: ^7.3.2
   freezed: ^2.4.7
   json_serializable: ^6.7.1
