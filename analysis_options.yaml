@@ -12,6 +12,8 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/*gr.dart"
     - "lib/firebase_options.dart"
+    - "lib/firebase_options_dev.dart"
+    - "lib/firebase_options_stg.dart"
 
   language:
     strict-casts: true
@@ -28,9 +30,18 @@ dart_code_metrics:
     - package:dart_code_metrics_presets/pub.yaml
     - package:dart_code_metrics_presets/metrics_recommended.yaml
     - recommended
+
   rules-exclude:
     - lib/bootstrap.dart
+
+  metrics-exclude:
+    - test/**
+    - lib/main_development.dart
+    - lib/main_production.dart
+    - lib/main_staging.dart
+
   rules:
+    - format-comment: false
     - avoid-dynamic:
         exclude:
           - lib/app/app_bloc_observer.dart
@@ -55,11 +66,6 @@ dart_code_metrics:
           - e
           - wtf
           - f
-    - avoid-inferrable-type-arguments:
-        ignored-invocations:
-          - context.read
-          - GetIt.I
-          - watch
     - avoid-ignoring-return-values:
         exclude:
           - lib/main_development.dart
@@ -93,6 +99,34 @@ dart_code_metrics:
     - member-ordering:
         exclude:
           - lib/routes/app_router.dart
+        order:
+          - constructors
+          - public-fields
+          - private-fields
+          - public-getters
+          - private-getters
+          - public-setters
+          - private-setters
+          - public-methods
+          - private-methods
+    - prefer-extracting-callbacks:
+        ignored-named-arguments:
+          - onPressed
+          - create
+        allowed-line-count: 3
+    - avoid-inferrable-type-arguments:
+        ignored-invocations:
+          - context.read
+          - GetIt.I
+          - watch
+          - context.select
+          - context.watch
+    - prefer-overriding-parent-equality:
+        exclude:
+          - lib/form_inputs/**
+    - avoid-unnecessary-nullable-return-type:
+        exclude:
+          - lib/form_inputs/**
 
   formatter:
     indent: 0
