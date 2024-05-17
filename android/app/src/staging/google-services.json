@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "1093971647275",
+    "project_id": "pokebook-4790a",
+    "storage_bucket": "pokebook-4790a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093971647275:android:69a79bdc3a3934572ec36e",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.phundit_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7dCFl8Xn857wL9eZhaXOFTkQ4YlPSkkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093971647275:android:350e3b6b0d0532c42ec36e",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.phundit_app.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7dCFl8Xn857wL9eZhaXOFTkQ4YlPSkkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093971647275:android:5f09847d0d0e06232ec36e",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.phundit_app.stg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7dCFl8Xn857wL9eZhaXOFTkQ4YlPSkkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
