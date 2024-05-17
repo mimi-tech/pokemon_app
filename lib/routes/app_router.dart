@@ -1,3 +1,4 @@
+// ignore_for_file: prefer-declaring-const-constructor
 import "package:auto_route/auto_route.dart";
 
 import "package:mimi_pokemon_app/routes/app_router.gr.dart";

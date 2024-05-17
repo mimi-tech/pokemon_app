@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-ignoring-return-values
+
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
@@ -22,6 +24,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   final _appRouter = AppRouter();
   final _repository = const PokeMonServices();
+
   @override
   void dispose() {
     _appRouter.dispose();
