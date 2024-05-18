@@ -27,7 +27,7 @@ migrate_working_dir/
 
 # Flutter/Dart/Pub related
 **/doc/api/
-**/ios/Flutter/.last_build_id
+#**/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -40,6 +40,8 @@ linked_*.ds
 unlinked.ds
 unlinked_spec.ds
 .fvm/
+# Except for application packages
+pubspec.lock  
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -110,3 +112,17 @@ app.*.map.json
 !.idea/codeStyles/
 !.idea/dictionaries/
 !.idea/runConfigurations/
+
+#Freezed
+*.freezed.dart
+*.g.dart
+
+#AutoRoute
+*.gr.dart
+
+#DCM 
+widgets_report/
+metrics/
+
+#FlutterGen
+*.gen.dart
