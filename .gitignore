@@ -41,30 +41,7 @@ unlinked.ds
 unlinked_spec.ds
 .fvm/
 # Except for application packages
-pubspec.lock
-
-# remove file
-lib/model/pokemon/pokemon.freezed.dart
-lib/model/pokemon/pokemon.g.dart
-lib/model/ability/ability.freezed.dart
-lib/model/ability/ability.g.dart
-lib/model/dreamWorld/dream_world.freezed.dart
-lib/model/dreamWorld/dream_world.g.dart
-lib/model/form/form.freezed.dart
-lib/model/form/form.g.dart
-lib/model/namedAPIResource/named_api_resource.freezed.dart
-lib/model/namedAPIResource/named_api_resource.g.dart
-lib/model/other/other.freezed.dart
-lib/model/other/other.g.dart
-lib/model/species/species.freezed.dart
-lib/model/species/species.g.dart
-lib/model/sprites/sprites.freezed.dart
-lib/model/sprites/sprites.g.dart
-lib/model/stat/stat.freezed.dart
-lib/model/stat/stat.g.dart
-lib/model/type/types.freezed.dart
-lib/model/type/types.g.dart
-
+pubspec.lock  
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -143,7 +120,7 @@ app.*.map.json
 #AutoRoute
 *.gr.dart
 
-#DCM
+#DCM 
 widgets_report/
 metrics/
 
