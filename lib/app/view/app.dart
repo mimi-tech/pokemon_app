@@ -3,16 +3,15 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
-import "package:mimi_pokemon_app/app/bloc/Logic/pokemon_details_bloc.dart";
-import "package:mimi_pokemon_app/app/bloc/pokemon/load_data.dart";
-import "package:mimi_pokemon_app/app/bloc/pokemon/pokemon_bloc.dart";
+
 import "package:mimi_pokemon_app/commons/app_colors.dart";
 import "package:mimi_pokemon_app/routes/app_router.dart";
-import "package:mimi_pokemon_app/services/poke_mon_services.dart";
+import "package:mimi_pokemon_app/splash_screen/bloc/pokemon_bloc.dart";
+import "package:mimi_pokemon_app/splash_screen/repository/splash_screen_repository.dart";
 import "package:mimi_pokemon_app/theme/app_theme.dart";
-import "package:mimi_pokemon_app/theme/current_theme_state.dart";
-import "package:mimi_pokemon_app/theme/theme_bloc.dart";
-import "package:mimi_pokemon_app/theme/theme_state.dart";
+import "package:mimi_pokemon_app/theme/bloc/theme_bloc.dart";
+import "package:mimi_pokemon_app/view_all/bloc/view_all_pokemon_bloc.dart";
+import "package:mimi_pokemon_app/view_all/repository/view_all_pokemon_repository.dart";
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -23,7 +22,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final _appRouter = AppRouter();
-  final _repository = const PokeMonServices();
+  final _viewAllPokemonRepository = const ViewAllPokemonRepository();
 
   @override
   void dispose() {
@@ -40,11 +39,11 @@ class _AppState extends State<App> {
         BlocProvider(create: (context) => ThemeBloc(AppColors.kPinkColor)),
         // Moved BlocProviders here.
         BlocProvider<PokemonBloc>(
-          create: (context) =>
-              PokemonBloc(const PokeMonServices())..add(const LoadData()),
+          create: (context) => PokemonBloc(const SplashScreenRepository())
+            ..add(const LoadData()),
         ),
-        BlocProvider<PokemonDetailsBloc>.value(
-          value: PokemonDetailsBloc(_repository),
+        BlocProvider<ViewAllPokemonBloc>.value(
+          value: ViewAllPokemonBloc(_viewAllPokemonRepository),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(

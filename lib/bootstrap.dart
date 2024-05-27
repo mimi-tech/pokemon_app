@@ -3,7 +3,7 @@ import "dart:developer";
 
 import "package:flutter/widgets.dart";
 import "package:hydrated_bloc/hydrated_bloc.dart";
-import "package:mimi_pokemon_app/services/error_handler.dart";
+import "package:mimi_pokemon_app/utils/api_error_handler/error_handler.dart";
 import "package:path_provider/path_provider.dart";
 
 class Bootstrap extends BlocObserver {

@@ -9,10 +9,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:mimi_pokemon_app/app/view/home_page.dart' as _i2;
-import 'package:mimi_pokemon_app/app/view/splash_screen.dart' as _i3;
-import 'package:mimi_pokemon_app/app/view/viewAll/view_all_screen.dart' as _i4;
-import 'package:mimi_pokemon_app/counter/view/counter_page.dart' as _i1;
+import 'package:mimi_pokemon_app/counter/page/counter_page.dart' as _i1;
+import 'package:mimi_pokemon_app/home/page/home_page.dart' as _i2;
+import 'package:mimi_pokemon_app/splash_screen/page/splash_screen.dart' as _i3;
+import 'package:mimi_pokemon_app/view_all/page/view_all_screen.dart' as _i4;
 
 abstract class $AppRouter extends _i5.RootStackRouter {
   $AppRouter({super.navigatorKey});
