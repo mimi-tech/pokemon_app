@@ -8,7 +8,7 @@ import "package:mocktail/mocktail.dart";
 void main() {
   const rendersCounterPage = "renders CounterPage";
   const app = "App";
-  const initialColor = AppColors.kPinkColor;
+  const initialColor = AppColors.pinkColor;
   final mockStorage = _MockStorage();
   group(app, () {
     setUp(() {

@@ -13,7 +13,7 @@ class PokemonTypeWidget extends StatelessWidget {
         "${const PokemonTypeAssets().getTypeString(title ?? "")} ${title ?? ""}";
 
     return Material(
-      color: AppColors.kDividerColor,
+      color: AppColors.dividerColor,
       borderRadius: BorderRadius.circular(AppDimes().size53),
       child: Padding(
         padding: EdgeInsets.symmetric(

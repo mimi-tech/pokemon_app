@@ -6,7 +6,7 @@ import "package:mimi_pokemon_app/theme/app_text_styles.dart";
 class AppTheme {
   static ThemeData lightTheme(Color primaryColor) {
     return ThemeData(
-      hintColor: AppColors.kHintColor,
+      hintColor: AppColors.hintColor,
       primaryColor: primaryColor,
       fontFamily: AppTextStyles.primaryFamily,
       iconTheme: IconThemeData(size: AppDimes().size25),
@@ -20,7 +20,7 @@ class AppTheme {
         bodyMedium: AppTextStyles().kBodyText2Style,
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.kWhiteColor,
+        backgroundColor: AppColors.whiteColor,
         elevation: 0,
       ),
       cardTheme: AppTextStyles().kCardTheme,

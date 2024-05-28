@@ -30,7 +30,7 @@ class SimilarPokemon extends PokemonDetails {
         buildDetails(context),
         Column(
           children: [
-            const Divider(color: AppColors.kGrayColor),
+            const Divider(color: AppColors.grayColor),
             Center(child: AutoSizeText(l10n.similar, style: theme.titleMedium)),
             SizedBox(height: AppDimes().size20),
             BlocProvider(
@@ -50,8 +50,8 @@ class SimilarPokemon extends PokemonDetails {
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                AppColors.kWhiteColor,
-                                AppColors.kGradientColor
+                                AppColors.whiteColor,
+                                AppColors.gradientColor
                                     .withOpacity(AppDimes().size02),
                               ],
                             ),

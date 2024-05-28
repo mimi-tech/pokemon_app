@@ -1,5 +1,3 @@
-// ignore_for_file: avoid-ignoring-return-values
-
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
@@ -13,37 +11,27 @@ import "package:mimi_pokemon_app/theme/bloc/theme_bloc.dart";
 import "package:mimi_pokemon_app/view_all/bloc/view_all_pokemon_bloc.dart";
 import "package:mimi_pokemon_app/view_all/repository/view_all_pokemon_repository.dart";
 
-class App extends StatefulWidget {
+final _appRouter = AppRouter();
+
+class App extends StatelessWidget {
   const App({super.key});
 
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  final _appRouter = AppRouter();
-  final _viewAllPokemonRepository = const ViewAllPokemonRepository();
-
-  @override
-  void dispose() {
-    _appRouter.dispose();
-    super.dispose();
-  }
-
+  // @override
   @override
   Widget build(BuildContext context) {
-    ThemeData? theme = AppTheme.lightTheme(AppColors.kPinkColor);
+    ThemeData? theme = AppTheme.lightTheme(AppColors.pinkColor);
+    const viewAllPokemonRepository = ViewAllPokemonRepository();
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ThemeBloc(AppColors.kPinkColor)),
+        BlocProvider(create: (context) => ThemeBloc(AppColors.pinkColor)),
         // Moved BlocProviders here.
         BlocProvider<PokemonBloc>(
           create: (context) => PokemonBloc(const SplashScreenRepository())
             ..add(const LoadData()),
         ),
         BlocProvider<ViewAllPokemonBloc>.value(
-          value: ViewAllPokemonBloc(_viewAllPokemonRepository),
+          value: ViewAllPokemonBloc(viewAllPokemonRepository),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(

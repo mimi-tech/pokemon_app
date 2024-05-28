@@ -70,8 +70,8 @@ class _SideModelWidgetState extends State<SideModelWidget> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          AppColors.kGradientColor1,
-                          AppColors.kGradientColor2,
+                          AppColors.gradientColor1,
+                          AppColors.gradientColor2,
                         ],
                       ),
                     ),
@@ -97,7 +97,7 @@ class _SideModelWidgetState extends State<SideModelWidget> {
             ),
             Container(
               decoration: BoxDecoration(
-                color: AppColors.kWhiteColor,
+                color: AppColors.whiteColor,
                 borderRadius: BorderRadius.circular(AppDimes().size5),
               ),
               margin: EdgeInsets.symmetric(
@@ -175,7 +175,7 @@ class _SideModelWidgetState extends State<SideModelWidget> {
             borderRadius: BorderRadius.circular(dimens.size60),
             boxShadow: [
               BoxShadow(
-                color: AppColors.kGrayColor,
+                color: AppColors.grayColor,
                 offset: Offset(0, AppDimes().size4),
               ),
             ],

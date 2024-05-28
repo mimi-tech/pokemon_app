@@ -26,7 +26,6 @@ class NestedCardWidget extends StatelessWidget {
 
   void _handleTap(BuildContext context) {
     if (selectedIndex == index) {
-      // selectedIndex = -1;
       context.read<ViewAllPokemonBloc>().add(const CardTapped(index: -1));
     } else {
       context.read<ViewAllPokemonBloc>().add(CardTapped(index: index ?? 0));
@@ -48,7 +47,7 @@ class NestedCardWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: selectedIndex == index
                   ? Colors.grey.withOpacity(AppDimes().size02)
-                  : AppColors.kWhiteColor,
+                  : AppColors.whiteColor,
               borderRadius: BorderRadius.circular(AppDimes().size26),
             ),
             width: double.infinity,
@@ -78,7 +77,7 @@ class NestedCardWidget extends StatelessWidget {
                         child: AutoSizeText(
                           AppStrings.views,
                           style: theme.bodyMedium?.copyWith(
-                            color: AppColors.kWhiteColor,
+                            color: AppColors.whiteColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -92,7 +91,7 @@ class NestedCardWidget extends StatelessWidget {
             height: appDimes.size220,
             child: Padding(
               padding: EdgeInsets.all(AppDimes().size14),
-              child: const Card(color: AppColors.kCardColor, elevation: 0),
+              child: const Card(color: AppColors.cardColor, elevation: 0),
             ),
           ),
           Padding(
@@ -115,21 +114,29 @@ class NestedCardWidget extends StatelessWidget {
                 children: [
                   AutoSizeText(pokemonTitle, style: theme.headlineMedium),
                   SizedBox(height: AppDimes().size20),
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: AppDimes().size15,
-                    children: [
-                      for (int nums = 0;
-                          nums < (pokemonData?.types?.length ?? 0);
-                          nums += 1)
-                        PokemonTypeWidget(
-                          title: pokemonData?.types
-                                  ?.elementAtOrNull(nums)
-                                  ?.type
-                                  ?.name ??
-                              "",
-                        ),
-                    ],
+                  SizedBox(
+                    height: AppDimes().size50,
+                    child: Center(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (ctx, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(left: AppDimes().size50),
+                            child: Center(
+                              child: PokemonTypeWidget(
+                                title: pokemonData?.types
+                                        ?.elementAtOrNull(index)
+                                        ?.type
+                                        ?.name ??
+                                    "",
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: pokemonData?.types?.length ?? 0,
+                      ),
+                    ),
                   ),
                 ],
               ),

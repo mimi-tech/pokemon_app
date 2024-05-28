@@ -1,15 +1,15 @@
 class AppDimes {
-  double kFontSize18 = 18;
-  double kFontSize32 = 32.33;
-  double kFontSize20 = 20;
-  double kFontSize21 = 21.56;
-  double kFontSize2116 = 21.16;
-  double kFontSize48 = 48;
-  double kFontSize56 = 56;
-  double kFontSize19 = 19.37;
-  double kFontSize15 = 15.06;
-  double kFontSize16 = 16;
-  double kMargin = 20;
+  double fontSize18 = 18;
+  double fontSize32 = 32.33;
+  double fontSize20 = 20;
+  double fontSize21 = 21.56;
+  double fontSize2116 = 21.16;
+  double fontSize48 = 48;
+  double fontSize56 = 56;
+  double fontSize19 = 19.37;
+  double fontSize15 = 15.06;
+  double fontSize16 = 16;
+  double margin = 20;
   double size14 = 14;
   double size4 = 4;
   double size40 = 40;

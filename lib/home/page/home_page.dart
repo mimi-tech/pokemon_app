@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: AppDimes().kMargin),
+          margin: EdgeInsets.symmetric(horizontal: AppDimes().margin),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

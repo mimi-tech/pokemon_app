@@ -7,25 +7,22 @@ import "package:xml/xml.dart";
 
 class DominantColor {
   const DominantColor();
+
   List<Pokemon> findMatchingPokemon(
     List<Pokemon> pokemonList,
     List<Types> typeList,
   ) {
     try {
-      final matchedPokemon = <Pokemon>[];
-
-      for (final pokemon in pokemonList) {
-        for (final typeMap in typeList) {
-          final typeName = typeMap.type?.name;
-          if (pokemon.types?.any((type) => type.type?.name == typeName) ??
-              false) {
-            matchedPokemon.add(pokemon);
-            break;
-          }
-        }
-      }
-
-      return matchedPokemon;
+      return pokemonList
+          .where(
+            (pokemon) => typeList.any(
+              (typeMap) =>
+                  pokemon.types
+                      ?.any((type) => type.type?.name == typeMap.type?.name) ??
+                  false,
+            ),
+          )
+          .toList();
     } catch (error) {
       return [];
     }

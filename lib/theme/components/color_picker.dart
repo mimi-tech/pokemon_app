@@ -26,7 +26,7 @@ class ColorPicker extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.transparent,
         border: Border.all(
-          color: borderColor ?? AppColors.kDarkGrayColor,
+          color: borderColor ?? AppColors.darkGrayColor,
           width: AppDimes().size093,
         ),
         shape: BoxShape.circle,

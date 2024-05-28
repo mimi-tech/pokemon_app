@@ -27,7 +27,7 @@ class StatsPokemon extends PokemonDetails {
       children: [
         Column(
           children: [
-            const Divider(color: AppColors.kGrayColor),
+            const Divider(color: AppColors.grayColor),
             Center(child: AutoSizeText(l10n.stats, style: theme.titleMedium)),
             SizedBox(height: AppDimes().size02),
             Container(
@@ -36,8 +36,8 @@ class StatsPokemon extends PokemonDetails {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.kWhiteColor,
-                    AppColors.kGradientColor.withOpacity(AppDimes().size02),
+                    AppColors.whiteColor,
+                    AppColors.gradientColor.withOpacity(AppDimes().size02),
                   ],
                 ),
               ),
@@ -48,7 +48,7 @@ class StatsPokemon extends PokemonDetails {
                   return Padding(
                     padding: EdgeInsets.symmetric(
                       vertical: AppDimes().size8,
-                      horizontal: AppDimes().kMargin,
+                      horizontal: AppDimes().margin,
                     ),
                     child: Column(
                       children: [
@@ -68,7 +68,7 @@ class StatsPokemon extends PokemonDetails {
                                     ? 0.0
                                     : (stats?.base_stat?.toDouble() ?? 0) /
                                         AppDimes().size100,
-                                backgroundColor: AppColors.kProgressColor,
+                                backgroundColor: AppColors.progressColor,
                                 valueColor: AlwaysStoppedAnimation<Color>(
                                   Theme.of(context).primaryColor,
                                 ),
@@ -83,7 +83,7 @@ class StatsPokemon extends PokemonDetails {
                             ),
                           ],
                         ),
-                        const Divider(color: AppColors.kGrayColor),
+                        const Divider(color: AppColors.grayColor),
                       ],
                     ),
                   );

@@ -59,7 +59,7 @@ class SplashScreen extends StatelessWidget {
                         TextSpan(
                           text: l10n.book,
                           style: theme.displayMedium
-                              ?.copyWith(color: AppColors.kPinkColor),
+                              ?.copyWith(color: AppColors.pinkColor),
                         ),
                       ],
                       style: theme.displayMedium,

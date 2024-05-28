@@ -15,7 +15,7 @@ class ThemeDialogWidget extends StatefulWidget {
 }
 
 class _ThemeDialogWidgetState extends State<ThemeDialogWidget> {
-  Color _selectedColor = AppColors.kPinkColor;
+  Color _selectedColor = AppColors.pinkColor;
 
   void _handleColorSelection(
     BuildContext context,
@@ -30,7 +30,7 @@ class _ThemeDialogWidgetState extends State<ThemeDialogWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     final l10n = context.l10n;
-    final themeColor = [AppColors.kPinkColor, Colors.cyan, Colors.orange];
+    final themeColor = [AppColors.pinkColor, Colors.cyan, Colors.orange];
     final size = MediaQuery.sizeOf(context);
     final dimens = AppDimes();
 
@@ -59,7 +59,7 @@ class _ThemeDialogWidgetState extends State<ThemeDialogWidget> {
               image: const DecorationImage(
                 image: AssetImage(AppStrings.backgroundImage),
                 colorFilter: ColorFilter.mode(
-                  AppColors.kLightGrayColor,
+                  AppColors.lightGrayColor,
                   BlendMode.darken,
                 ),
                 fit: BoxFit.cover,
@@ -80,7 +80,7 @@ class _ThemeDialogWidgetState extends State<ThemeDialogWidget> {
                       child: ColorPicker(
                         borderColor:
                             _selectedColor == themeColor.elementAtOrNull(nums)
-                                ? AppColors.kBlackColor
+                                ? AppColors.blackColor
                                 : Colors.transparent,
                         color: themeColor.elementAtOrNull(nums),
                         containerHeight: dimens.size50.toInt(),

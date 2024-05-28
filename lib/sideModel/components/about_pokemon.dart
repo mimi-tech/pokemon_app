@@ -30,7 +30,7 @@ class AboutPokemon extends PokemonDetails {
         buildDetails(context),
         Column(
           children: [
-            const Divider(color: AppColors.kGrayColor),
+            const Divider(color: AppColors.grayColor),
             AutoSizeText(l10n.about, style: theme.titleMedium),
             SizedBox(height: AppDimes().size20),
             Container(
@@ -61,36 +61,40 @@ class AboutPokemon extends PokemonDetails {
                         AutoSizeText(
                           l10n.abilities,
                           style: theme.bodyLarge
-                              ?.copyWith(fontSize: AppDimes().kFontSize16),
+                              ?.copyWith(fontSize: AppDimes().fontSize16),
                         ),
                         SizedBox(width: AppDimes().size50),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for (int nums = 0;
-                                abilities != null && nums < abilities.length;
-                                nums += 1)
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.circle_rounded,
-                                    size: AppDimes().size8,
-                                    color: AppColors.kBlackColor,
-                                  ),
-                                  SizedBox(width: AppDimes().size5),
-                                  AutoSizeText(
-                                    abilities
-                                            .elementAtOrNull(nums)
-                                            ?.ability
-                                            ?.name
-                                            ?.toString() ??
-                                        "",
-                                    style: theme.bodyLarge
-                                        ?.copyWith(fontWeight: FontWeight.w600),
-                                  ),
-                                ],
-                              ),
-                          ],
+                        SizedBox(
+                          height: AppDimes().size100,
+                          child: Center(
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (ctx, index) {
+                                return Row(
+                                  children: [
+                                    Icon(
+                                      Icons.circle_rounded,
+                                      size: AppDimes().size8,
+                                      color: AppColors.blackColor,
+                                    ),
+                                    SizedBox(width: AppDimes().size5),
+                                    AutoSizeText(
+                                      abilities
+                                              ?.elementAtOrNull(index)
+                                              ?.ability
+                                              ?.name
+                                              ?.toString() ??
+                                          "",
+                                      style: theme.bodyLarge?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                              itemCount: abilities?.length,
+                            ),
+                          ),
                         ),
                       ],
                     ),

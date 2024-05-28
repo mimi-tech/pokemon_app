@@ -9,49 +9,49 @@ class AppTextStyles {
 
   final kHeadLine1Style = TextStyle(
     color: _fontColor,
-    fontSize: AppDimes().kFontSize56,
+    fontSize: AppDimes().fontSize56,
     fontWeight: FontWeight.w600,
     fontFamily: primaryFamily,
   );
 
   final kHeadLine2Style = TextStyle(
     color: _fontColor,
-    fontSize: AppDimes().kFontSize48,
+    fontSize: AppDimes().fontSize48,
     fontWeight: FontWeight.w600,
     fontFamily: primaryFamily,
   );
 
   final kHeadLine4Style = TextStyle(
     color: _fontColor,
-    fontSize: AppDimes().kFontSize32,
+    fontSize: AppDimes().fontSize32,
     fontWeight: FontWeight.w500,
     fontFamily: primaryFamily,
   );
 
   final kHeadLine5Style = TextStyle(
     color: _fontColor,
-    fontSize: AppDimes().kFontSize2116,
+    fontSize: AppDimes().fontSize2116,
     fontWeight: FontWeight.w600,
     fontFamily: primaryFamily,
   );
 
   final kBodyText1Style = TextStyle(
     color: _fontColor,
-    fontSize: AppDimes().kFontSize16,
+    fontSize: AppDimes().fontSize16,
     fontWeight: FontWeight.w400,
     fontFamily: secondaryFamily,
   );
 
   final kBodyText2Style = TextStyle(
     color: _fontColor,
-    fontSize: AppDimes().kFontSize18,
+    fontSize: AppDimes().fontSize18,
     fontWeight: FontWeight.w400,
     fontFamily: secondaryFamily,
   );
 
   final kSubTitle1Style = TextStyle(
     color: _fontColor,
-    fontSize: AppDimes().kFontSize19,
+    fontSize: AppDimes().fontSize19,
     fontWeight: FontWeight.w600,
     fontFamily: primaryFamily,
   );
@@ -62,5 +62,5 @@ class AppTextStyles {
       borderRadius: const BorderRadius.all(Radius.circular(20.21)),
     ),
   );
-  static const _fontColor = AppColors.kBlackColor;
+  static const _fontColor = AppColors.blackColor;
 }

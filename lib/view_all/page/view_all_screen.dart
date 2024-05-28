@@ -109,7 +109,7 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
           ),
         ),
         child: Container(
-          margin: EdgeInsets.all(dimes.kMargin),
+          margin: EdgeInsets.all(dimes.margin),
           child: Column(
             children: [
               Container(
@@ -117,7 +117,7 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                   borderRadius: BorderRadius.circular(_radius),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.kBorderColor,
+                      color: AppColors.borderColor,
                       offset: Offset(0, AppDimes().size4),
                     ),
                   ],
@@ -131,37 +131,37 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                       child: SvgPicture.asset(
                         Assets.search,
                         colorFilter: const ColorFilter.mode(
-                          AppColors.kLightGrayColor,
+                          AppColors.lightGrayColor,
                           BlendMode.srcIn,
                         ),
                       ),
                     ),
                     filled: true,
-                    fillColor: AppColors.kWhiteColor,
+                    fillColor: AppColors.whiteColor,
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: AppColors.kLightGrayColor2,
+                        color: AppColors.lightGrayColor2,
                         width: _widthValue,
                       ),
                       borderRadius: BorderRadius.circular(_radius),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: AppColors.kLightGrayColor,
+                        color: AppColors.lightGrayColor,
                         width: _widthValue,
                       ),
                       borderRadius: BorderRadius.circular(_radius),
                     ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: AppColors.kLightGrayColor3,
+                        color: AppColors.lightGrayColor3,
                         width: _widthValue,
                       ),
                       borderRadius: BorderRadius.circular(_radius),
                     ),
                   ),
                   style: theme.bodyMedium,
-                  cursorColor: AppColors.kLightGrayColor2,
+                  cursorColor: AppColors.lightGrayColor2,
                 ),
               ),
               SizedBox(height: AppDimes().size20),
@@ -247,10 +247,10 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                     buttonShape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(AppDimes().size8),
                     ),
-                    buttonUnselectedForegroundColor: AppColors.kBlackColor,
+                    buttonUnselectedForegroundColor: AppColors.blackColor,
                     buttonSelectedBackgroundColor:
                         Theme.of(context).primaryColor,
-                    buttonUnselectedBackgroundColor: AppColors.kBorderColor,
+                    buttonUnselectedBackgroundColor: AppColors.borderColor,
                     buttonTextStyle:
                         theme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
                     buttonPadding: EdgeInsets.all(AppDimes().size5),
@@ -258,7 +258,7 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                   prevButtonContent: Icon(
                     Icons.arrow_back_ios,
                     size: AppDimes().size14,
-                    color: AppColors.kBlackColor,
+                    color: AppColors.blackColor,
                   ),
                   nextButtonContent: Icon(
                     Icons.arrow_forward_ios,

@@ -16,7 +16,7 @@ class AboutWidget extends StatelessWidget {
       children: [
         AutoSizeText(
           header?.toString() ?? "",
-          style: theme.bodyLarge?.copyWith(fontSize: AppDimes().kFontSize16),
+          style: theme.bodyLarge?.copyWith(fontSize: AppDimes().fontSize16),
         ),
         SizedBox(width: AppDimes().size50),
         AutoSizeText(
