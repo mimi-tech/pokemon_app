@@ -27,7 +27,8 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => ThemeBloc(AppColors.pinkColor)),
         // Moved BlocProviders here.
         BlocProvider(
-            create: (context) => PokemonBloc(const SplashScreenRepository())),
+          create: (context) => PokemonBloc(const SplashScreenRepository()),
+        ),
 
         BlocProvider<ViewAllPokemonBloc>.value(
           value: ViewAllPokemonBloc(viewAllPokemonRepository),
