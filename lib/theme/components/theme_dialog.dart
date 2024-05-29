@@ -6,7 +6,7 @@ import "package:mimi_pokemon_app/theme/page/theme_dialog_widget.dart";
 class ThemeDialog {
   const ThemeDialog();
 
-  void showMyDialog(BuildContext context) {
+  static void showMyDialog(BuildContext context) {
     unawaited(
       showDialog(
         context: context,

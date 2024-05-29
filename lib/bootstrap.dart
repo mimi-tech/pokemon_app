@@ -3,7 +3,6 @@ import "dart:developer";
 
 import "package:flutter/widgets.dart";
 import "package:hydrated_bloc/hydrated_bloc.dart";
-import "package:mimi_pokemon_app/utils/api_error_handler/error_handler.dart";
 import "package:path_provider/path_provider.dart";
 
 class Bootstrap extends BlocObserver {
@@ -37,7 +36,10 @@ class Bootstrap extends BlocObserver {
 }
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
-  FlutterError.onError = ErrorHandler.handleFlutterError;
+  //FlutterError.onError = ErrorHandler.handleFlutterError;
+  FlutterError.onError = (details) {
+    log(details.exceptionAsString(), stackTrace: details.stack);
+  };
 
   Bloc.observer = const Bootstrap();
 

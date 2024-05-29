@@ -11,8 +11,19 @@ import "package:mimi_pokemon_app/l10n/l10n.dart";
 import "package:mimi_pokemon_app/splash_screen/bloc/pokemon_bloc.dart";
 
 @RoutePage()
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<PokemonBloc>(context).add(const LoadData());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +32,7 @@ class SplashScreen extends StatelessWidget {
 
     return BlocListener<PokemonBloc, PokemonState>(
       listener: (context, state) {
-        context.handlePokemonStateError(state);
+        state.handlePokemonStateError(context);
       },
       child: Scaffold(
         body: Stack(

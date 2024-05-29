@@ -47,7 +47,7 @@ class ViewAllAppbar extends StatelessWidget implements PreferredSizeWidget {
               secondContainerHeight: dimens.size32,
               secondContainerWidth: dimens.size30.toInt(),
             ),
-            onTap: () => const ThemeDialog().showMyDialog(context),
+            onTap: () => ThemeDialog.showMyDialog(context),
           ),
         ],
       ),
