@@ -3,12 +3,12 @@ import "package:mimi_pokemon_app/theme/app_text_styles.dart";
 
 class AppTextTheme {
   final kTextTheme = TextTheme(
-    displayLarge: AppTextStyles().kHeadLine1Style,
-    displayMedium: AppTextStyles().kHeadLine2Style,
-    headlineMedium: AppTextStyles().kHeadLine4Style,
-    headlineSmall: AppTextStyles().kHeadLine5Style,
-    titleMedium: AppTextStyles().kSubTitle1Style,
-    bodyLarge: AppTextStyles().kBodyText1Style,
-    bodyMedium: AppTextStyles().kBodyText2Style,
+    displayLarge: AppTextStyles().headLine1Style,
+    displayMedium: AppTextStyles().headLine2Style,
+    headlineMedium: AppTextStyles().headLine4Style,
+    headlineSmall: AppTextStyles().headLine5Style,
+    titleMedium: AppTextStyles().subTitle1Style,
+    bodyLarge: AppTextStyles().bodyText1Style,
+    bodyMedium: AppTextStyles().bodyText2Style,
   );
 }

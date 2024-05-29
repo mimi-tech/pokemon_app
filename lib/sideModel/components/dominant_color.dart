@@ -29,9 +29,11 @@ class DominantColor {
   }
 
   Future<List<Color>> getDominantColorFromSvg(String svgUrl) async {
-    final svgString = await const SideModelRepository().fetchSvgString(svgUrl);
+    final taskEither = const SideModelRepository().fetchSvgString(svgUrl);
 
-    return parseSvgForDominantColors(svgString);
+    final result = await taskEither.run();
+
+    return result.fold((error) => [], parseSvgForDominantColors);
   }
 
   List<Color> getMostThreeRepeatedColors(List<Color> colors) {

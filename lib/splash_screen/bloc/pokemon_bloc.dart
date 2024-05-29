@@ -16,15 +16,11 @@ class PokemonBloc extends HydratedBloc<PokemonEvent, PokemonState> {
 
   @override
   PokemonState? fromJson(Map<String, dynamic> json) {
-    try {
-      final pokemonList = (json["pokemonList"] as List)
-          .map((item) => PokemonModel.fromJson(item as Map<String, Object>))
-          .toList();
+    final pokemonList = (json["pokemonList"] as List?)
+        ?.map((item) => PokemonModel.fromJson(item as Map<String, dynamic>))
+        .toList();
 
-      return DataSuccess(pokemonList);
-    } catch (_) {
-      return null;
-    }
+    return pokemonList == null ? DataSuccess(pokemonList ?? []) : null;
   }
 
   @override
@@ -36,13 +32,15 @@ class PokemonBloc extends HydratedBloc<PokemonEvent, PokemonState> {
 
   Future<void> _loadData(LoadData event, Emitter<PokemonState> emit) async {
     emit(const DataLoading());
-    final result = await repository.fetchPokemon();
-    result.when(
-      (success) {
-        emit(DataSuccess(success));
-      },
+    final taskEither = repository.fetchPokemon;
+    final result = await taskEither.run();
+
+    result.fold(
       (error) {
         emit(DataError(error.toString()));
+      },
+      (right) {
+        emit(DataSuccess(right));
       },
     );
   }

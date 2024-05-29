@@ -34,7 +34,7 @@ class ViewAllPokemonBloc
 
       for (final nums in numsRange) {
         final result = await repository.fetchPokemonDetails(
-          event.pokemonData.elementAtOrNull(nums)?.url?.toString() ?? "",
+          event.pokemonData.elementAtOrNull(nums)?.url ?? "",
         );
 
         result.when(fetchedData.add, (error) {

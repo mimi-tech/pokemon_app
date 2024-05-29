@@ -11,19 +11,19 @@ class LightTheme {
       fontFamily: AppTextStyles.primaryFamily,
       iconTheme: IconThemeData(size: AppDimes().size25),
       textTheme: TextTheme(
-        displayLarge: AppTextStyles().kHeadLine1Style,
-        displayMedium: AppTextStyles().kHeadLine2Style,
-        headlineMedium: AppTextStyles().kHeadLine4Style,
-        headlineSmall: AppTextStyles().kHeadLine5Style,
-        titleMedium: AppTextStyles().kSubTitle1Style,
-        bodyLarge: AppTextStyles().kBodyText1Style,
-        bodyMedium: AppTextStyles().kBodyText2Style,
+        displayLarge: AppTextStyles().headLine1Style,
+        displayMedium: AppTextStyles().headLine2Style,
+        headlineMedium: AppTextStyles().headLine4Style,
+        headlineSmall: AppTextStyles().headLine5Style,
+        titleMedium: AppTextStyles().subTitle1Style,
+        bodyLarge: AppTextStyles().bodyText1Style,
+        bodyMedium: AppTextStyles().bodyText2Style,
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.whiteColor,
         elevation: 0,
       ),
-      cardTheme: AppTextStyles().kCardTheme,
+      cardTheme: AppTextStyles().cardTheme,
     );
   }
 }
