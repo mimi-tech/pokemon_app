@@ -1,37 +1,47 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phundit_app/app/bloc/Logic/pokemon_details_bloc.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_bloc.dart';
-import 'package:phundit_app/app/bloc/pokemon/pokemon_event.dart';
-import 'package:phundit_app/commons/color.dart';
-import 'package:phundit_app/counter/counter.dart';
-import 'package:phundit_app/l10n/l10n.dart';
-import 'package:phundit_app/routes/app_router.dart';
-import 'package:phundit_app/services/pokemon_service.dart';
-import 'package:phundit_app/theme/light_theme.dart';
-import 'package:phundit_app/theme/theme_cubit.dart';
-import 'package:phundit_app/theme/theme_state.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
+
+import "package:mimi_pokemon_app/commons/app_colors.dart";
+import "package:mimi_pokemon_app/routes/app_router.dart";
+import "package:mimi_pokemon_app/splash_screen/bloc/pokemon_bloc.dart";
+import "package:mimi_pokemon_app/splash_screen/repository/splash_screen_repository.dart";
+import "package:mimi_pokemon_app/theme/app_theme.dart";
+import "package:mimi_pokemon_app/theme/bloc/theme_bloc.dart";
+import "package:mimi_pokemon_app/view_all/bloc/view_all_pokemon_bloc.dart";
+import "package:mimi_pokemon_app/view_all/repository/view_all_pokemon_repository.dart";
+
+final _appRouter = AppRouter();
 
 class App extends StatelessWidget {
-  final AppRouter appRouter = AppRouter();
-  final DataBloc dataBloc = DataBloc(PokeMonServices())..add(LoadData());
-  ThemeData theme = MyTheme.lightTheme(kPinkColor);
+  const App({super.key});
+
+  // @override
   @override
   Widget build(BuildContext context) {
+    ThemeData? theme = AppTheme.lightTheme(AppColors.pinkColor);
+    const viewAllPokemonRepository = ViewAllPokemonRepository();
+
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ThemeCubit(kPinkColor)),
-        BlocProvider<DataBloc>.value(value: dataBloc),
-        BlocProvider<PokemonBloc>.value(value: PokemonBloc()),
-
+        BlocProvider(create: (context) => ThemeBloc(AppColors.pinkColor)),
+        // Moved BlocProviders here.
+        BlocProvider<PokemonBloc>(
+          create: (context) => PokemonBloc(const SplashScreenRepository())
+            ..add(const LoadData()),
+        ),
+        BlocProvider<ViewAllPokemonBloc>.value(
+          value: ViewAllPokemonBloc(viewAllPokemonRepository),
+        ),
       ],
-      child: BlocBuilder<ThemeCubit, ThemeState>(
+      child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           if (state is CurrentThemeState) {
-            theme = MyTheme.lightTheme(state.primaryColor);
+            theme = AppTheme.lightTheme(state.primaryColor);
           }
+
           return MaterialApp.router(
-            routerConfig: appRouter.config(),
+            routerConfig: _appRouter.config(),
             theme: theme,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
@@ -41,45 +51,3 @@ class App extends StatelessWidget {
     );
   }
 }
-
-
-
-/*class App extends StatelessWidget {
-  App({super.key});
-
-  ThemeData theme = MyTheme.lightTheme(kPinkColor);
-
-  @override
-  Widget build(BuildContext context) {
-    AppRouter appRouter = AppRouter();
-    print("kkkkkkkkk");
-    //BlocProvider(create: (context) => ThemeCubit(kPinkColor));
-    return MultiBlocProvider(
-        providers: [
-        BlocProvider(create: (context) => ThemeCubit(kPinkColor)),
-      BlocProvider<DataBloc>(create: (context) => DataBloc(PokeMonServices())
-        ..add(LoadData()),),
-          ],
-      child: MaterialApp.router(
-        routerConfig: appRouter.config(),
-        theme: theme,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-
-        builder: (context, child) {
-          return  BlocListener<ThemeCubit, ThemeState>(
-                listener: (context, state) async {
-                  if (state is CurrentThemeState) {
-                    theme = MyTheme.lightTheme(state.primaryColor);
-                  }
-                },
-              child:child,
-              );
-
-            },),);
-
-
-  }
-}
-
-*/

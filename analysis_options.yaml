@@ -127,6 +127,7 @@ dart_code_metrics:
     - avoid-unnecessary-nullable-return-type:
         exclude:
           - lib/form_inputs/**
+       
 
   formatter:
     indent: 0
