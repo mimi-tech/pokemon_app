@@ -36,7 +36,7 @@ dev_dependencies:
   bloc_test: ^9.1.6
   build_runner: ^2.4.8
   dart_code_metrics_presets: ^2.11.0
-  flutter_gen_runner: ^5.4.0
+  flutter_gen_runner: ^5.5.0+1
   flutter_test:
     sdk: flutter
   #flutter_native_splash: ^2.2.19
