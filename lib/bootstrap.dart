@@ -36,11 +36,6 @@ class Bootstrap extends BlocObserver {
 }
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
-  //FlutterError.onError = ErrorHandler.handleFlutterError;
-  FlutterError.onError = (details) {
-    log(details.exceptionAsString(), stackTrace: details.stack);
-  };
-
   Bloc.observer = const Bootstrap();
 
   WidgetsFlutterBinding.ensureInitialized();
