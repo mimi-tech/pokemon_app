@@ -8,11 +8,13 @@ part "theme_event.dart";
 part "theme_state.dart";
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  ThemeBloc(Color initialColor) : super(CurrentThemeState(initialColor));
+  ThemeBloc(Color initialColor) : super(CurrentThemeState(initialColor)) {
+    on<ThemeEvent>(_themeEvent);
+  }
 
-  Stream<ThemeState> mapEventToState(ThemeEvent event) async* {
+  void _themeEvent(ThemeEvent event, Emitter<ThemeState> emit) {
     if (event is ChangeThemeColor) {
-      yield CurrentThemeState(event.color);
+      emit(CurrentThemeState(event.color));
     }
   }
 }

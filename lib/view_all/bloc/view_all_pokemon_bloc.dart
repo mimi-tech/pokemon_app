@@ -33,13 +33,17 @@ class ViewAllPokemonBloc
       );
 
       for (final nums in numsRange) {
-        final result = await repository.fetchPokemonDetails(
+        final taskEither = repository.fetchPokemonDetails(
           event.pokemonData.elementAtOrNull(nums)?.url ?? "",
         );
+        final result = await taskEither.run();
 
-        result.when(fetchedData.add, (error) {
-          emit(PokemonError(error: error.toString()));
-        });
+        result.fold(
+          (error) {
+            emit(PokemonError(error: error.toString()));
+          },
+          fetchedData.add,
+        );
       }
 
       emit(PokemonLoaded(pokemon: fetchedData, pokemonData: Pokemon()));

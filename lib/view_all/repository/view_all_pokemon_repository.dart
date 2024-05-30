@@ -1,31 +1,33 @@
-import "dart:convert";
-
-import "package:http/http.dart" as http;
+import "package:dio/dio.dart";
+import "package:fpdart/fpdart.dart";
 import "package:mimi_pokemon_app/commons/app_dimes.dart";
 import "package:mimi_pokemon_app/utils/api_error_handler/api_exception.dart";
-import "package:mimi_pokemon_app/utils/api_error_handler/pokemon_exceptions.dart";
 import "package:mimi_pokemon_app/view_all/model/pokemon/pokemon.dart";
-import "package:multiple_result/multiple_result.dart";
 
 class ViewAllPokemonRepository {
   const ViewAllPokemonRepository();
 
-  Future<Result<Pokemon, ApiException>> fetchPokemonDetails(String url) async {
-    try {
-      final response = await http.get(
-        Uri.parse(url),
-        headers: {"Content-Type": "application/json"},
-      );
-      if (response.statusCode == AppDimes().size200) {
-        final jsonDecoded = json.decode(response.body);
-        final data = Pokemon.fromJson(jsonDecoded as Map<String, dynamic>);
+  TaskEither<ApiException, Pokemon> fetchPokemonDetails(String url) {
+    return TaskEither.tryCatch(
+      () async {
+        final dio = Dio();
 
-        return Success(data);
-      }
+        final response = await dio.get<Map<String, dynamic>>(
+          url,
+          options: Options(headers: {"Content-Type": "application/json"}),
+        );
 
-      return const PokemonExceptions().handleHttpError(response);
-    } catch (error) {
-      return const PokemonExceptions().handleGeneralError(error.toString());
-    }
+        if (response.statusCode == AppDimes().size200) {
+          final jsonDecoded = response.data;
+          final data =
+              jsonDecoded == null ? null : Pokemon.fromJson(jsonDecoded);
+
+          return data ?? Pokemon();
+        }
+
+        return Pokemon();
+      },
+      (error, _) => ApiException(error.toString()),
+    );
   }
 }
